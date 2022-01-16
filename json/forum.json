@@ -1,0 +1,26 @@
+[
+	{
+		"icon":"img/webicon/stackoverflow.png",
+		"webname":"Stack Overflow",
+		"intro":"编程交流网站",
+		"site":"https://stackoverflow.com/"
+	},
+	{
+		"icon":"img/webicon/mathstackexchange.png",
+		"webname":"Math Stack Exchange",
+		"intro":"数学交流网站",
+		"site":"https://math.stackexchange.com/"
+	},
+	{
+		"icon":"img/webicon/stackexchange.png",
+		"webname":"Stack Exchange",
+		"intro":"综合交流网站",
+		"site":"https://stackexchange.com/"
+	},
+	{
+		"icon":"img/webicon/zhihu.png",
+		"webname":"知乎",
+		"intro":"搞笑网站",
+		"site":"https://www.zhihu.com/"
+	}
+]

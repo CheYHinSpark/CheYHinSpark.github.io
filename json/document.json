@@ -1,0 +1,32 @@
+[
+	{
+		"icon":"img/webicon/researchgate.png",
+		"webname":"ResearchGate",
+		"intro":"科研社交网站",
+		"site":"https://www.researchgate.net/"
+	},
+	{
+		"icon":"img/webicon/semanticscholar.png",
+		"webname":"Semantic Scholar",
+		"intro":"文献搜索网站",
+		"site":"https://www.semanticscholar.org/"
+	},
+	{
+		"icon":"img/webicon/webofscience.png",
+		"webname":"Web of Science",
+		"intro":"全球引文数据库",
+		"site":"https://www.webofscience.com/"
+	},
+	{
+		"icon":"img/webicon/arxiv.png",
+		"webname":"arXiv",
+		"intro":"预印本网站",
+		"site":"https://arxiv.org/"
+	},
+	{
+		"icon":"img/webicon/zlibrary.png",
+		"webname":"Z-library",
+		"intro":"全球最大的数字图书馆",
+		"site":"https://1lib.domains/"
+	}
+]

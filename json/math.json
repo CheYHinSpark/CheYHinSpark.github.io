@@ -1,0 +1,14 @@
+[
+	{
+		"icon":"img/webicon/encyclopediaofmathematics.png",
+		"webname":"Encyclopedia of Mathematics",
+		"intro":"数学百科",
+		"site":"https://encyclopediaofmath.org/wiki/Main_Page"
+	},
+	{
+		"icon":"img/webicon/wikipedia.png",
+		"webname":"Wikipedia",
+		"intro":"维基百科",
+		"site":"https://www.wikipedia.org/"
+	}
+]
