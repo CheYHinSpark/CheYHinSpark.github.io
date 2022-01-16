@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>学习收藏夹</title>
+		<link rel="stylesheet" type="text/css" href="css/general.css">
+	</head>
+	<body id="bg">
+		<script src="js/enter.js"></script>
+		<script src="js/search_item.js"></script>
+		<script src="js/super_search_box.js"></script>
+		<script src="js/website_box.js"></script>
+		<script src="js/website_table.js"></script>
+		<div id="main_div">
+			<h1>学习收藏夹</h1>
+			
+			<super-search-box id="ssb"></super-search-box>
+			<website-table id="documenttable" tablename="文献搜索" weblist="json/document.json"></website-table>
+			<website-table id="mathtable" tablename="数学知识" weblist="json/math.json"></website-table>
+			<website-table id="codetable" tablename="编程知识" weblist="json/code.json"></website-table>
+			<website-table id="forumtable" tablename="论坛交流" weblist="json/forum.json"></website-table>
+			<website-table id="arttable" tablename="学习？资料" weblist="json/special-art.json"></website-table>
+
+		</div>
+	</body>
+</html>
