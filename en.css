@@ -1,0 +1,14 @@
+#div-lang::before { content: "En ⇄ 汉"; }
+#div-HOME::before { content: "Home"; }
+#div-CV::before { content: "CV"; }
+#div-PUBLICATION::before { content: "Publications"; }
+
+#h1-NAME::before { content: "Yihong Chen, 陈奕宏"; }
+#p-affiliation::before { content: "Department of Mathematical Sciences, Tsinghua University"; }
+#p-address::before { content: "Haidian District, Beijing, China, 10084"; }
+#p-email::before { content: "Email: "; }
+
+#h1-self_intro::before { content: "Introduction"; }
+#p-self_intro::before { content: "I am a Ph.D. student in Department of Mathematical Sciences in Tsinghua Unniversity. My research focuses on model reduction and numerical computation of kinetic equations. My work includes: (1) proposed a discrete-velocity-direction model to systematically extend methods for 1-D kinetic equations to higher dimensions; (2) developed a new extended quadrature method of moments based on Poisson kernel. "; }
+
+#h1-publication_list::before { content: "Publications"; }
