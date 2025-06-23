@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>陈奕宏，Yihong Chen</title>
-        <link rel="stylesheet" href="css/style.css">
-        <script src="js/lang.js"></script>
+        <link rel="stylesheet" href="css/portrait.css" media="screen and (orientation: portrait)">
+        <link rel="stylesheet" href="css/landscape.css" media="screen and (orientation: landscape)">
         <script src="js/control.js"></script>
+        <script src="js/lang.js"></script>
     </head>
     <body>
         <div class="header row-container">
@@ -18,15 +19,14 @@
         </div>
         <div class="content-container">
             <!-- 基础信息 -->
-            <div class="row-container">
-                <div id="div-name_block">
-                    <h1 id="h1-NAME"></h1>
-                    <p id="p-affiliation"></p>
-                    <p id="p-address"></p>
-                    <p id="p-email">chenyihong0907@foxmail.com</p>
+            <div id="div-name_block">
+                <div id="div-profile_block">
+                    <img class="profile" src="img/profile.png"/>
                 </div>
-                <div class="flex-row-spring"></div>
-                <img class="profile" src="img/profile.png"/>
+                <h1 id="h1-NAME"></h1>
+                <p id="p-affiliation"></p>
+                <p id="p-address"></p>
+                <p id="p-email">chenyihong0907@foxmail.com</p>
             </div>
             <!-- 自我介绍 -->
             <h1 id="h1-self_intro"></h1>
@@ -52,6 +52,8 @@
                 </li>
             </ol>
         </div>
+        
+        <script src="js/lang.js"></script>
     </body>
 </html>
  
