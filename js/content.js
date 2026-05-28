@@ -1,5 +1,27 @@
 // 这个文件是网站的“内容数据表”。
 // 维护文字、导航名、项目、经历、论文、荣誉时，优先改这里，不需要改 HTML。
+// 中英文完全相同的信息放在 SITE_SHARED，避免邮箱、PDF 路径等内容维护两次。
+window.SITE_SHARED = {
+    profilePhoto: "img/profile.png",
+    emails: [
+        "chenyiho20@mails.tsinghua.edu.cn",
+        "chenyihong0907@foxmail.com"
+    ],
+    cvHref: {
+        zh: "cv/CV_zh.pdf",
+        en: "cv/CV_en.pdf"
+    },
+    profileLines: [
+        "Department of Electronic Engineering, Tsinghua University",
+        "Rohm Building 11-309, Beijing, China"
+    ],
+    contactLinks: [
+        { key: "email", emailIndex: 0 },
+        { key: "zhCv", cvLang: "zh" },
+        { key: "enCv", cvLang: "en" }
+    ]
+};
+
 window.SITE_CONTENT = {
     zh: {
         htmlLang: "zh-CN",
@@ -22,18 +44,11 @@ window.SITE_CONTENT = {
             name: "陈奕宏 Yihong Chen",
             lead: "我具有动理学方程、模型约化和高效数值方法的研究训练，正在将严谨的建模与算法能力迁移到大语言模型、智能体系统、数学推理和工具化科研流程中。",
             tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"],
-            cvLabel: "下载中文简历",
-            cvHref: "cv/CV_zh.pdf"
+            cvLabel: "下载中文简历"
         },
         profile: {
             alt: "陈奕宏",
-            role: "Postdoctoral Researcher",
-            lines: [
-                "Department of Electronic Engineering, Tsinghua University",
-                "Rohm Building 11-309, Beijing, China",
-                "chenyiho20@mails.tsinghua.edu.cn",
-                "chenyihong0907@foxmail.com"
-            ]
+            role: "Postdoctoral Researcher"
         },
         summary: {
             kicker: "Profile",
@@ -137,11 +152,11 @@ window.SITE_CONTENT = {
                 "欢迎围绕 AI Agent、LLM 应用、数学推理、科学计算和研究自动化方向交流。",
                 "如果需要更完整的教育经历、论文信息和项目细节，可以查看中英文简历。"
             ],
-            links: [
-                { label: "Email", href: "mailto:chenyiho20@mails.tsinghua.edu.cn" },
-                { label: "中文简历", href: "cv/CV_zh.pdf" },
-                { label: "English CV", href: "cv/CV_en.pdf" }
-            ]
+            linkLabels: {
+                email: "Email",
+                zhCv: "中文简历",
+                enCv: "English CV"
+            }
         },
         footer: "© Yihong Chen"
     },
@@ -165,18 +180,11 @@ window.SITE_CONTENT = {
             name: "Yihong Chen 陈奕宏",
             lead: "I have research training in kinetic equations, model reduction, and efficient numerical methods. I am now applying this background to large language models, agent systems, mathematical reasoning, and tool-based research workflows.",
             tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"],
-            cvLabel: "Download English CV",
-            cvHref: "cv/CV_en.pdf"
+            cvLabel: "Download English CV"
         },
         profile: {
             alt: "Yihong Chen",
-            role: "Postdoctoral Researcher",
-            lines: [
-                "Department of Electronic Engineering, Tsinghua University",
-                "Rohm Building 11-309, Beijing, China",
-                "chenyiho20@mails.tsinghua.edu.cn",
-                "chenyihong0907@foxmail.com"
-            ]
+            role: "Postdoctoral Researcher"
         },
         summary: {
             kicker: "Profile",
@@ -280,11 +288,11 @@ window.SITE_CONTENT = {
                 "I am open to conversations around AI agents, LLM applications, mathematical reasoning, scientific computing, and research automation.",
                 "For a fuller view of my education, publications, and project details, please see the Chinese or English CV."
             ],
-            links: [
-                { label: "Email", href: "mailto:chenyiho20@mails.tsinghua.edu.cn" },
-                { label: "中文简历", href: "cv/CV_zh.pdf" },
-                { label: "English CV", href: "cv/CV_en.pdf" }
-            ]
+            linkLabels: {
+                email: "Email",
+                zhCv: "中文简历",
+                enCv: "English CV"
+            }
         },
         footer: "© Yihong Chen"
     }

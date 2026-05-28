@@ -78,9 +78,10 @@
     /* 顶栏与响应式断点 */
     --header-height: 72px;
     --header-height-compact: 64px;
-    --breakpoint-tablet: 900px;
-    --breakpoint-phone: 620px;
-    --breakpoint-narrow: 420px;
+    /* 注意：原生 CSS 的 @media 不能直接使用变量，下面数值需要和响应式区手动保持一致。 */
+    --breakpoint-tablet: 960px;
+    --breakpoint-phone: 640px;
+    --breakpoint-narrow: 480px;
 
     /* 小装饰尺寸：时间轴、列表圆点、链接下划线等 */
     --timeline-marker-size: 26px;
@@ -582,7 +583,7 @@ main,
 
 .publication-list li {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: var(--space-l);
     align-items: start;
     padding: var(--space-l);
@@ -591,7 +592,8 @@ main,
 
 .publication-list li::before {
     display: inline-flex;
-    grid-column: 1 / -1;
+    grid-column: 1;
+    grid-row: 1;
     align-items: center;
     width: fit-content;
     min-height: var(--timeline-marker-size);
@@ -606,6 +608,8 @@ main,
 
 .publication-main {
     display: grid;
+    grid-column: 2;
+    grid-row: 1;
     gap: var(--space-sss);
 }
 
@@ -628,6 +632,8 @@ main,
 .publication-links {
     display: flex;
     flex-wrap: wrap;
+    grid-column: 3;
+    grid-row: 1;
     justify-content: flex-end;
     gap: var(--space-ss);
 }
@@ -741,10 +747,6 @@ main,
         font-size: var(--text-s);
     }
 
-    .site-header {
-        position: static;
-    }
-
     .brand {
         font-size: var(--text-l);
     }
@@ -767,6 +769,12 @@ main,
         padding: var(--space-lll) 0;
     }
 
+    .profile-card {
+        justify-self: center;
+        order: -1;
+        width: min(var(--profile-card-width), var(--profile-card-mobile-width));
+    }
+
     .role-panel,
     .work-item,
     .timeline-body,
@@ -785,22 +793,34 @@ main,
         margin-top: var(--space-ss);
     }
 
-    .work-item-header,
     .publication-list li {
-        grid-template-columns: 1fr;
+        gap: var(--space-s);
+        grid-template-columns: auto minmax(0, 1fr) auto;
     }
 
     .work-item-header {
         display: grid;
+        grid-template-columns: 1fr;
         gap: var(--space-s);
+    }
+
+    .publication-list li::before {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .publication-main {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .publication-links {
+        grid-column: 3;
+        grid-row: 1;
     }
 
     .compact-link {
         justify-self: start;
-    }
-
-    .publication-links {
-        justify-content: flex-start;
     }
 }
 

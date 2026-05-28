@@ -54,8 +54,9 @@
         if (cvButton) {
             cvButton.addEventListener("click", function () {
                 var content = window.SITE_CONTENT[currentLang];
-                if (content.hero.cvHref) {
-                    window.open(content.hero.cvHref, "_blank", "noopener");
+                var cvHref = getCvHref(currentLang, content);
+                if (cvHref) {
+                    window.open(cvHref, "_blank", "noopener");
                 }
             });
         }
@@ -111,10 +112,15 @@
 
     // 个人信息：头像 alt、身份、单位、地址和邮箱。
     function renderProfile(profile) {
+        var shared = getSharedContent();
+
         setText("profile-role", profile.role);
 
         var photo = document.getElementById("profile-photo");
         if (photo) {
+            if (shared.profilePhoto) {
+                photo.setAttribute("src", shared.profilePhoto);
+            }
             photo.setAttribute("alt", profile.alt);
         }
 
@@ -124,7 +130,7 @@
         }
 
         clearElement(list);
-        profile.lines.forEach(function (line) {
+        getProfileLines(profile, shared).forEach(function (line) {
             var item = document.createElement("li");
             item.textContent = line;
             list.appendChild(item);
@@ -401,7 +407,7 @@
         }
 
         clearElement(links);
-        contact.links.forEach(function (linkData) {
+        getContactLinks(contact).forEach(function (linkData) {
             var link = document.createElement("a");
             link.className = "action-link";
             link.href = linkData.href;
@@ -414,6 +420,53 @@
 
             links.appendChild(link);
         });
+    }
+
+    // 共享配置：邮箱、PDF 路径、头像路径等中英文一致的信息都从这里读。
+    function getSharedContent() {
+        return window.SITE_SHARED || {};
+    }
+
+    function getCvHref(lang, content) {
+        var shared = getSharedContent();
+        if (shared.cvHref && shared.cvHref[lang]) {
+            return shared.cvHref[lang];
+        }
+
+        return content.hero.cvHref || "";
+    }
+
+    function getProfileLines(profile, shared) {
+        if (profile.lines) {
+            return profile.lines;
+        }
+
+        return (shared.profileLines || []).concat(shared.emails || []);
+    }
+
+    function getContactLinks(contact) {
+        var labels = contact.linkLabels || {};
+        var shared = getSharedContent();
+        var sharedLinks = shared.contactLinks || contact.links || [];
+
+        return sharedLinks.map(function (linkData) {
+            return {
+                href: resolveSharedHref(linkData, shared),
+                label: linkData.label || labels[linkData.key] || linkData.key || linkData.href
+            };
+        });
+    }
+
+    function resolveSharedHref(linkData, shared) {
+        if (typeof linkData.emailIndex === "number" && shared.emails && shared.emails[linkData.emailIndex]) {
+            return "mailto:" + shared.emails[linkData.emailIndex];
+        }
+
+        if (linkData.cvLang && shared.cvHref && shared.cvHref[linkData.cvLang]) {
+            return shared.cvHref[linkData.cvLang];
+        }
+
+        return linkData.href || "";
     }
 
     // 通用小工具：生成一组标签。
