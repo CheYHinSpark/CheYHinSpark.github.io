@@ -1,60 +1,116 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>陈奕宏，Yihong Chen</title>
-        <link rel="stylesheet" href="css/portrait.css" media="screen and (orientation: portrait)">
-        <link rel="stylesheet" href="css/landscape.css" media="screen and (orientation: landscape)">
-        <script src="js/control.js"></script>
-        <script src="js/lang.js"></script>
-    </head>
-    <body>
-        <div class="header row-container">
-            <!-- 依次为中英文切换按钮，主页，简历，发表 -->
-            <div class="header-item" id="div-lang" onclick="onClickChangeLang()"></div>
-            <div class="flex-row-spring"></div>
-            <div class="header-item" id="div-HOME"></div>
-            <div class="header-item" id="div-CV" onclick="onClickCV()"></div>
-            <div class="header-item" id="div-PUBLICATION"></div>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="陈奕宏的个人简历主页，聚焦数学建模、数值算法、LLM Agent、科学计算与科研自动化。">
+    <title>陈奕宏 | Yihong Chen</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/content.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" id="brand">陈奕宏</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="#summary" data-nav="summary">简介</a>
+            <a href="#experience" data-nav="experience">经历</a>
+            <a href="#work" data-nav="work">项目</a>
+            <a href="#publications" data-nav="publications">成果</a>
+            <a href="#honors" data-nav="honors">荣誉</a>
+            <a href="#contact" data-nav="contact">联系</a>
+        </nav>
+        <div class="header-actions">
+            <button class="text-button" id="language-toggle" type="button">En</button>
+            <button class="text-button primary" id="cv-button" type="button">简历</button>
         </div>
-        <div class="content-container">
-            <!-- 基础信息 -->
-            <div id="div-name_block">
-                <div id="div-profile_block">
-                    <img class="profile" src="img/profile.png"/>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="profile-name">
+            <div class="hero-copy">
+                <h1 id="profile-name"></h1>
+                <p class="lead" id="hero-lead"></p>
+                <div class="profile-meta">
+                    <p class="profile-role" id="profile-role"></p>
+                    <ul class="meta-list" id="profile-lines"></ul>
                 </div>
-                <h1 id="h1-NAME"></h1>
-                <p id="p-affiliation"></p>
-                <p id="p-address-1"></p>
-                <p id="p-address-2"></p>
-                <p id="p-email">chenyihong0907@foxmail.com</p>
+                <div class="tag-list" id="hero-tags" aria-label="Focus areas"></div>
             </div>
-            <!-- 自我介绍 -->
-            <h1 id="h1-self_intro"></h1>
-            <p id="p-self_intro"></p>
-            <!-- 发表清单 -->
-            <h1 id="h1-publication_list"></h1>
-            <ol class="publication-list">
-                <li>
-                    <strong>Yihong Chen</strong>, Qian Huang, Wen-An Yong, Ruixi Zhang. Poisson quadrature method of moments for 2D kinetic equations with velocity of constant magnitude. <em>Multiscale Modeling and Simulation</em>, 23(1), 2025. <a href="https://doi.org/10.1137/23m1620181">🡥</a>
-                </li>
-                <li>
-                    <strong>Yihong Chen</strong>, Qian Huang, Wen-An Yong. Discrete-velocity-direction models of BGK-type with minimum entropy: II. Weighted models. <em>Journal of Scientific Computing</em>, 99(84), 2024. <a href="https://doi.org/10.1007/s10915-024-02531-3">🡥</a>
-                </li>
-                <li>
-                    Qian Huang, <strong>Yihong Chen</strong>, Wen-An Yong. Discrete-Velocity-Direction Models of BGK-type
-                    with Minimum Entropy: I. Basic Idea. <em>Journal of Scientific Computing</em>, 95(3), 2023. <a href="https://doi.org/10.1007/s10915-023-02211-8">🡥</a>
-                </li>
-                <li class="preparing-item">
-                    Ruixi Zhang, <strong>Yihong Chen</strong>, Qian Huang, Wen-An Yong. Dissipativeness of the hyperbolic quadrature method of moments for kinetic equations. <em>arXiv</em>:2406.13931, 2024.
-                </li>
-                <li class="preparing-item">
-                    Tianshu Li, <strong>Yihong Chen</strong>, Qian Huang, Wen-An Yong. Combining hyperbolic quadrature method of moments with discrete-velocity-direction models for solving BGK-type equations. <em>arXiv</em>:2411.12654, 2024.
-                </li>
-            </ol>
-        </div>
-        
-        <script src="js/lang.js"></script>
-    </body>
+            <aside class="profile-card" aria-label="Profile">
+                <img class="profile-photo" id="profile-photo" src="img/profile.png" alt="陈奕宏">
+            </aside>
+        </section>
+
+        <section class="section" id="summary" aria-labelledby="summary-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="summary-kicker"></p>
+                <h2 id="summary-title"></h2>
+            </div>
+            <div class="summary-grid">
+                <div class="body-copy" id="summary-copy"></div>
+                <div class="role-panel">
+                    <h3 id="target-title"></h3>
+                    <ul class="clean-list" id="target-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience" aria-labelledby="experience-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="experience-kicker"></p>
+                <h2 id="experience-title"></h2>
+            </div>
+            <div class="timeline" id="experience-list"></div>
+        </section>
+
+        <section class="section" id="work" aria-labelledby="work-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="work-kicker"></p>
+                <h2 id="work-title"></h2>
+            </div>
+            <div class="work-list" id="work-list"></div>
+        </section>
+
+        <section class="section" id="publications" aria-labelledby="publications-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="publications-kicker"></p>
+                <h2 id="publications-title"></h2>
+                <p class="section-note" id="publications-note"></p>
+            </div>
+            <div class="publication-block">
+                <h3 id="published-title"></h3>
+                <ol class="publication-list" id="published-list"></ol>
+            </div>
+            <div class="publication-block">
+                <h3 id="preprint-title"></h3>
+                <ol class="publication-list" id="preprint-list"></ol>
+            </div>
+        </section>
+
+        <section class="section" id="honors" aria-labelledby="honors-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="honors-kicker"></p>
+                <h2 id="honors-title"></h2>
+                <p class="section-note" id="honors-note"></p>
+            </div>
+            <div class="honor-list" id="honor-list"></div>
+        </section>
+
+        <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+            <div class="section-heading">
+                <p class="section-kicker" id="contact-kicker"></p>
+                <h2 id="contact-title"></h2>
+            </div>
+            <div class="contact-layout">
+                <div class="body-copy" id="contact-copy"></div>
+                <div class="contact-links" id="contact-links"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span id="footer-text"></span>
+    </footer>
+</body>
 </html>
- 
