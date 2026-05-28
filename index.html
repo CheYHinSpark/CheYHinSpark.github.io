@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="陈奕宏的个人简历主页，聚焦数学建模、数值算法、LLM Agent、科学计算与科研自动化。">
     <title>陈奕宏 | Yihong Chen</title>
+    <!-- 样式统一维护在 css/main.css；页面文字和列表数据主要维护在 js/content.js。 -->
     <link rel="stylesheet" href="css/main.css">
     <script src="js/content.js" defer></script>
     <script src="js/main.js" defer></script>
@@ -12,6 +13,7 @@
 <body>
     <header class="site-header">
         <a class="brand" href="#top" id="brand">陈奕宏</a>
+        <!-- 顶部导航：href、data-nav、下方 section 的 id 三者需要保持一致。 -->
         <nav class="site-nav" aria-label="Primary navigation">
             <a href="#summary" data-nav="summary">简介</a>
             <a href="#experience" data-nav="experience">经历</a>
@@ -27,6 +29,7 @@
     </header>
 
     <main id="top">
+        <!-- 首屏：这里保留结构，姓名、简介、标签和个人信息由 JS 按语言填入。 -->
         <section class="hero" aria-labelledby="profile-name">
             <div class="hero-copy">
                 <h1 id="profile-name"></h1>
@@ -42,6 +45,7 @@
             </aside>
         </section>
 
+        <!-- 每个 section 都是一个页面章节；删除章节时，也检查 main.js 里的渲染函数。 -->
         <section class="section" id="summary" aria-labelledby="summary-title">
             <div class="section-heading">
                 <p class="section-kicker" id="summary-kicker"></p>
@@ -72,6 +76,7 @@
             <div class="work-list" id="work-list"></div>
         </section>
 
+        <!-- 论文列表来自 window.SITE_PUBLICATIONS，正式发表和预印本按 status 自动分组。 -->
         <section class="section" id="publications" aria-labelledby="publications-title">
             <div class="section-heading">
                 <p class="section-kicker" id="publications-kicker"></p>
@@ -88,6 +93,7 @@
             </div>
         </section>
 
+        <!-- 荣誉区可以为空；为空时 JS 会显示 content.js 里的 emptyText。 -->
         <section class="section" id="honors" aria-labelledby="honors-title">
             <div class="section-heading">
                 <p class="section-kicker" id="honors-kicker"></p>

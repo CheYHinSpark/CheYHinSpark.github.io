@@ -1,3 +1,5 @@
+// 这个文件是网站的“内容数据表”。
+// 维护文字、导航名、项目、经历、论文、荣誉时，优先改这里，不需要改 HTML。
 window.SITE_CONTENT = {
     zh: {
         htmlLang: "zh-CN",
@@ -6,6 +8,7 @@ window.SITE_CONTENT = {
         brand: "陈奕宏",
         languageToggle: "En",
         cvButton: "简历",
+        // nav 的键名需要和 index.html 里的 data-nav 对应。
         nav: {
             summary: "简介",
             experience: "经历",
@@ -14,6 +17,7 @@ window.SITE_CONTENT = {
             honors: "荣誉",
             contact: "联系"
         },
+        // 首屏内容：姓名、简介、关键词和对应语言的简历链接。
         hero: {
             name: "陈奕宏 Yihong Chen",
             lead: "我具有动理学方程、模型约化和高效数值方法的研究训练，正在将严谨的建模与算法能力迁移到大语言模型、智能体系统、数学推理和工具化科研流程中。",
@@ -83,6 +87,7 @@ window.SITE_CONTENT = {
                 }
             ]
         },
+        // 经历条目：position 可用 "job" 或 "edu"，用于控制时间轴圆点颜色。
         experience: {
             kicker: "Experience",
             title: "教育与工作经历",
@@ -117,6 +122,7 @@ window.SITE_CONTENT = {
             publishedTitle: "正式发表",
             preprintTitle: "预印本"
         },
+        // 荣誉为空时会显示 emptyText；有内容后填入 items 数组即可。
         honors: {
             kicker: "Honors",
             title: "荣誉与奖励",
@@ -146,6 +152,7 @@ window.SITE_CONTENT = {
         brand: "Yihong Chen",
         languageToggle: "中文",
         cvButton: "CV",
+        // 英文内容结构需要和中文保持一致，方便语言切换。
         nav: {
             summary: "Summary",
             experience: "Experience",
@@ -223,6 +230,7 @@ window.SITE_CONTENT = {
                 }
             ]
         },
+        // position 与中文版一致：job 表示工作经历，edu 表示教育经历。
         experience: {
             kicker: "Experience",
             title: "Education and Work Experience",
@@ -257,6 +265,7 @@ window.SITE_CONTENT = {
             publishedTitle: "Peer-reviewed publications",
             preprintTitle: "Preprints"
         },
+        // 英文荣誉内容为空时同样显示 emptyText。
         honors: {
             kicker: "Honors",
             title: "Honors and Awards",
@@ -281,6 +290,8 @@ window.SITE_CONTENT = {
     }
 };
 
+// 论文列表独立出来，方便按 status 自动分到“正式发表”和“预印本”。
+// status 使用 "published" 或 "preprint"。
 window.SITE_PUBLICATIONS = [
     {
         status: "published",

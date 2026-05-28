@@ -1,6 +1,9 @@
+// 这个文件只负责“把 js/content.js 里的数据填进 index.html”。
+// 日常改文字、增删项目、增删论文时，优先改 content.js；只有改展示结构时才改这里。
 (function () {
     "use strict";
 
+    // 当前语言会优先读取浏览器本地保存的选择，其次根据浏览器语言猜测。
     var currentLang = getInitialLanguage();
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -31,10 +34,11 @@
         try {
             window.localStorage.setItem("site-language", lang);
         } catch (error) {
-            // Local files can disable storage in some browsers.
+            // 本地直接打开 HTML 时，少数浏览器可能禁用 localStorage；失败也不影响页面渲染。
         }
     }
 
+    // 绑定页面上的交互：语言切换按钮、简历按钮。
     function bindEvents() {
         var languageToggle = document.getElementById("language-toggle");
         var cvButton = document.getElementById("cv-button");
@@ -57,6 +61,7 @@
         }
     }
 
+    // 页面总渲染入口：新增章节时，在这里增加对应的 renderXXX 调用。
     function renderPage(lang) {
         var content = window.SITE_CONTENT[lang] || window.SITE_CONTENT.zh;
 
@@ -79,6 +84,7 @@
         setText("footer-text", content.footer);
     }
 
+    // 同步浏览器标题和搜索摘要。
     function updateMetaDescription(description) {
         var meta = document.querySelector("meta[name='description']");
         if (meta) {
@@ -95,6 +101,7 @@
         });
     }
 
+    // 首屏内容：姓名、简介、关键词标签。
     function renderHero(content) {
         var hero = content.hero;
         setText("profile-name", hero.name);
@@ -102,6 +109,7 @@
         renderTagList("hero-tags", hero.tags);
     }
 
+    // 个人信息：头像 alt、身份、单位、地址和邮箱。
     function renderProfile(profile) {
         setText("profile-role", profile.role);
 
@@ -123,6 +131,7 @@
         });
     }
 
+    // 简介区：正文段落和右侧能力关键词。
     function renderSummary(summary) {
         setText("summary-kicker", summary.kicker);
         setText("summary-title", summary.title);
@@ -139,6 +148,7 @@
         renderSimpleList("target-list", summary.targetRoles);
     }
 
+    // 科研与项目经历：每一项由 createWorkItem 生成一张卡片。
     function renderWork(work) {
         setText("work-kicker", work.kicker);
         setText("work-title", work.title);
@@ -197,6 +207,7 @@
         return article;
     }
 
+    // 教育与工作经历：position 决定时间轴圆点颜色，duration 决定右上角时间。
     function renderExperience(experience) {
         setText("experience-kicker", experience.kicker);
         setText("experience-title", experience.title);
@@ -240,6 +251,7 @@
         });
     }
 
+    // 学术成果：按 published / preprint 自动拆成两组列表。
     function renderPublications(copy) {
         setText("publications-kicker", copy.kicker);
         setText("publications-title", copy.title);
@@ -322,6 +334,7 @@
         return item;
     }
 
+    // 荣誉区：items 为空时显示 emptyText，避免页面出现空白章节。
     function renderHonors(honors) {
         setText("honors-kicker", honors.kicker);
         setText("honors-title", honors.title);
@@ -369,6 +382,7 @@
         return item;
     }
 
+    // 联系区：mailto 链接保留当前页，PDF 等文件链接在新标签打开。
     function renderContact(contact) {
         setText("contact-kicker", contact.kicker);
         setText("contact-title", contact.title);
@@ -402,6 +416,7 @@
         });
     }
 
+    // 通用小工具：生成一组标签。
     function renderTagList(elementId, tags) {
         var list = document.getElementById(elementId);
         if (!list) {
@@ -417,6 +432,7 @@
         });
     }
 
+    // 通用小工具：生成普通列表。
     function renderSimpleList(elementId, items) {
         var list = document.getElementById(elementId);
         if (!list) {
@@ -437,6 +453,7 @@
         return paragraph;
     }
 
+    // 安全写文本：目标节点不存在时直接跳过，方便你临时注释某个 HTML 区块。
     function setText(elementId, text) {
         var element = document.getElementById(elementId);
         if (element) {
@@ -444,6 +461,7 @@
         }
     }
 
+    // 清空容器后再重新渲染，避免语言切换时重复追加内容。
     function clearElement(element) {
         if (!element) {
             return;

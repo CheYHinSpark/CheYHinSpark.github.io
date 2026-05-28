@@ -1,20 +1,36 @@
-/* 1. Tokens */
+/* =========================================================
+   1. 全局变量：日常调风格时，优先只改这一块
+   ========================================================= */
 :root {
-    --color-ink: #172033;
-    --color-body: #334057;
-    --color-muted: #647084;
-    --color-page: #f7f9fc;
+    /* 颜色：页面正文、卡片、链接、强调色都集中在这里 */
+    --color-ink: #102030;
+    --color-body: #324456;
+    --color-muted: #647280;
+    --color-page: #f7f9fb;
     --color-panel: #ffffff;
-    --color-soft: #edf1f6;
-    --color-primary: #1059a8;
-    --color-primary-strong: #073f7f;
-    --color-accent: #197a63;
-    --color-warm: #a56522;
+    --color-white: #ffffff;
+    --color-soft: #edf2f6;
+    --color-primary: #0369cf;
+    --color-primary-strong: #0248ab;
+    --color-accent: #028a46;
+    --color-warm: #cf6903;
+
+    /* 颜色：状态、边框、浅色底，只在组件中复用 */
+    --color-header-bg: rgba(255, 255, 255, 0.9);
     --color-focus: rgba(25, 122, 99, 0.28);
     --color-border: rgba(100, 112, 132, 0.16);
     --color-border-strong: rgba(100, 112, 132, 0.28);
     --color-primary-border: rgba(16, 89, 168, 0.24);
+    --color-timeline-line: rgba(25, 122, 99, 0.22);
+    --color-link-surface: #f0f6fc;
+    --color-link-surface-hover: #e1edf8;
+    --color-tag-text: #20415c;
+    --color-tag-bg: #e6eef6;
+    --color-tag-border: rgba(16, 89, 168, 0.12);
+    --color-publication-index-bg: #e7f3ee;
+    --color-shadow-panel: rgba(24, 32, 40, 0.1);
 
+    /* 间距：以 m 为基准，向左变小，向右变大 */
     --space-sss: 4px;
     --space-ss: 8px;
     --space-s: 12px;
@@ -24,27 +40,65 @@
     --space-lll: 48px;
     --space-llll: 64px;
 
+    /* 字号：普通正文用 m，辅助信息用 s/ss，标题单独用 heading */
     --text-sss: 10px;
     --text-ss: 12px;
     --text-s: 14px;
     --text-m: 16px;
     --text-l: 18px;
     --text-ll: 20px;
-    --heading-m: clamp(24px, 4vw, 42px);
-    --heading-l: clamp(42px, 8vw, 72px);
+    --heading-m: clamp(24px, 4vw, 36px);
+    --heading-l: clamp(32px, 8vw, 48px);
 
+    /* 字重与行高：避免各处手写 600、800、1.5 */
+    --font-weight-b: 600;
+    --font-weight-bb: 800;
     --line-tight: 1.15;
     --line-base: 1.5;
-    --radius-m: 8px;
-    --shadow-panel: 0 18px 45px rgba(23, 32, 51, 0.1);
-    --transition-m: 0.18s ease;
+    --line-card-title: 1.35;
+    --line-meta: 1.5;
 
+    /* 圆角、边框、阴影、动效 */
+    --radius-m: 8px;
+    --border-width: 1px;
+    --focus-width: 3px;
+    --shadow-panel: 0 18px 45px var(--color-shadow-panel);
+    --transition-m: 0.18s ease;
+    --motion-lift: -1px;
+
+    /* 页面主要尺寸 */
     --content-width: 1120px;
+    --section-heading-width: 780px;
+    --hero-copy-width: 760px;
+    --sidebar-width: 330px;
+    --profile-card-width: 320px;
+    --profile-card-mobile-width: 80%;
+    --profile-photo-mobile-height: 320px;
+
+    /* 顶栏与响应式断点 */
     --header-height: 72px;
+    --header-height-compact: 64px;
+    --breakpoint-tablet: 900px;
+    --breakpoint-phone: 620px;
+    --breakpoint-narrow: 420px;
+
+    /* 小装饰尺寸：时间轴、列表圆点、链接下划线等 */
+    --timeline-marker-size: 26px;
+    --timeline-marker-border: 7px;
+    --timeline-line-width: 2px;
+    --timeline-date-width: 200px;
+    --list-dot-size: 6px;
+    --list-dot-top: 0.72em;
+    --link-underline-width: 0.08em;
+    --link-underline-offset: 0.24em;
+    --nav-blur: 16px;
+
     --font-sans: "Inter", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
 }
 
-/* 2. Reset and Base */
+/* =========================================================
+   2. 全局基底：通常不用改，负责浏览器默认样式归一
+   ========================================================= */
 * {
     box-sizing: border-box;
 }
@@ -56,9 +110,7 @@ html {
 body {
     margin: 0;
     color: var(--color-ink);
-    background:
-        linear-gradient(180deg, #eef4f9 0, var(--color-page) 360px),
-        var(--color-page);
+    background: var(--color-page);
     font-family: var(--font-sans);
     font-size: var(--text-m);
     line-height: var(--line-base);
@@ -66,8 +118,8 @@ body {
 
 a {
     color: var(--color-primary);
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.24em;
+    text-decoration-thickness: var(--link-underline-width);
+    text-underline-offset: var(--link-underline-offset);
 }
 
 a:hover {
@@ -81,11 +133,13 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-    outline: 3px solid var(--color-focus);
-    outline-offset: 3px;
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: var(--focus-width);
 }
 
-/* 3. Typography */
+/* =========================================================
+   3. 通用排版：标题、正文、章节小标题
+   ========================================================= */
 h1,
 h2,
 h3,
@@ -96,8 +150,8 @@ p {
 h1 {
     margin: var(--space-s) 0 0;
     font-size: var(--heading-l);
-    font-weight: 820;
-    line-height: 1.02;
+    font-weight: var(--font-weight-bb);
+    line-height: var(--line-tight);
 }
 
 h2 {
@@ -109,7 +163,7 @@ h2 {
 h3 {
     margin: 0;
     font-size: var(--text-ll);
-    line-height: 1.35;
+    line-height: var(--line-card-title);
 }
 
 .section-kicker,
@@ -117,7 +171,7 @@ h3 {
     margin: 0;
     color: var(--color-accent);
     font-size: var(--text-ss);
-    font-weight: 800;
+    font-weight: var(--font-weight-bb);
     text-transform: uppercase;
 }
 
@@ -128,7 +182,7 @@ h3 {
 }
 
 .lead {
-    max-width: 760px;
+    max-width: var(--hero-copy-width);
     margin: var(--space-l) 0 0;
 }
 
@@ -145,7 +199,9 @@ h3 {
     color: var(--color-muted);
 }
 
-/* 4. Page Layout */
+/* =========================================================
+   4. 页面骨架：容器宽度、章节距离、双栏布局
+   ========================================================= */
 main,
 .site-footer {
     width: min(var(--content-width), calc(100% - var(--space-lll)));
@@ -154,24 +210,27 @@ main,
 
 .section {
     padding: var(--space-llll) 0;
-    border-top: 1px solid var(--color-border);
+    border-top: var(--border-width) solid var(--color-border);
     scroll-margin-top: calc(var(--header-height) + var(--space-l));
 }
 
 .section-heading {
-    max-width: 780px;
+    max-width: var(--section-heading-width);
     margin-bottom: var(--space-ll);
 }
 
+/* 简介和联系区使用相同的右侧栏宽度 */
 .summary-grid,
 .contact-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 330px;
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
     gap: var(--space-ll);
     align-items: start;
 }
 
-/* 5. Reusable Components */
+/* =========================================================
+   5. 通用组件：按钮、标签、列表、卡片
+   ========================================================= */
 .text-button,
 .action-link,
 .compact-link {
@@ -185,14 +244,14 @@ main,
 }
 
 .text-button {
-    min-height: 40px;
+    min-height: calc(var(--space-l) + var(--space-m));
     padding: 0 var(--space-s);
     color: var(--color-ink);
     background: transparent;
-    border: 1px solid var(--color-border-strong);
+    border: var(--border-width) solid var(--color-border-strong);
     cursor: pointer;
     font-size: var(--text-s);
-    font-weight: 700;
+    font-weight: var(--font-weight-b);
 }
 
 .text-button:hover {
@@ -200,7 +259,7 @@ main,
 }
 
 .text-button.primary {
-    color: #fff;
+    color: var(--color-white);
     background: var(--color-primary);
     border-color: var(--color-primary);
 }
@@ -215,37 +274,25 @@ main,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 42px;
+    min-height: calc(var(--space-l) + var(--space-m));
     padding: 0 var(--space-m);
     color: var(--color-primary);
     background: var(--color-panel);
-    border: 1px solid var(--color-primary-border);
+    border: var(--border-width) solid var(--color-primary-border);
     font-size: var(--text-s);
-    font-weight: 760;
+    font-weight: var(--font-weight-b);
     text-decoration: none;
 }
 
 .action-link:hover,
 .compact-link:hover {
     color: var(--color-primary-strong);
-    background: #f0f6fc;
-    transform: translateY(-1px);
-}
-
-.action-link.primary {
-    color: #fff;
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-}
-
-.action-link.primary:hover {
-    color: #fff;
-    background: var(--color-primary-strong);
-    border-color: var(--color-primary-strong);
+    background: var(--color-link-surface);
+    transform: translateY(var(--motion-lift));
 }
 
 .compact-link {
-    min-height: 34px;
+    min-height: calc(var(--space-l) + var(--space-ss));
     padding: 0 var(--space-s);
     white-space: nowrap;
 }
@@ -260,14 +307,14 @@ main,
 .tag {
     display: inline-flex;
     align-items: center;
-    min-height: 30px;
+    min-height: calc(var(--space-l) + var(--space-ss));
     padding: var(--space-sss) var(--space-s);
-    color: #20415c;
-    background: #e6eef6;
-    border: 1px solid rgba(16, 89, 168, 0.12);
+    color: var(--color-tag-text);
+    background: var(--color-tag-bg);
+    border: var(--border-width) solid var(--color-tag-border);
     border-radius: var(--radius-m);
     font-size: var(--text-ss);
-    font-weight: 700;
+    font-weight: var(--font-weight-b);
 }
 
 .meta-list,
@@ -282,7 +329,7 @@ main,
     gap: var(--space-ss);
     color: var(--color-muted);
     font-size: var(--text-s);
-    line-height: 1.5;
+    line-height: var(--line-meta);
 }
 
 .clean-list {
@@ -299,23 +346,25 @@ main,
 
 .clean-list li::before {
     position: absolute;
-    top: 0.72em;
+    top: var(--list-dot-top);
     left: 0;
-    width: 6px;
-    height: 6px;
+    width: var(--list-dot-size);
+    height: var(--list-dot-size);
     background: var(--color-warm);
     border-radius: 50%;
     content: "";
 }
 
+/* 白底卡片的共用底座：新增卡片时优先复用这组视觉 */
 .role-panel,
 .work-item,
 .timeline-body,
 .publication-list li,
 .honor-item,
-.empty-state {
+.empty-state,
+.profile-card {
     background: var(--color-panel);
-    border: 1px solid var(--color-border);
+    border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-m);
 }
 
@@ -327,7 +376,9 @@ main,
     padding: var(--space-l);
 }
 
-/* 6. Header */
+/* =========================================================
+   6. 顶部导航：只负责定位、导航项和语言/CV按钮
+   ========================================================= */
 .site-header {
     position: sticky;
     top: 0;
@@ -338,15 +389,15 @@ main,
     gap: var(--space-l);
     min-height: var(--header-height);
     padding: 0 var(--space-ll);
-    background: rgba(255, 255, 255, 0.9);
-    border-bottom: 1px solid rgba(100, 112, 132, 0.18);
-    backdrop-filter: blur(16px);
+    background: var(--color-header-bg);
+    border-bottom: var(--border-width) solid var(--color-border);
+    backdrop-filter: blur(var(--nav-blur));
 }
 
 .brand {
     color: var(--color-ink);
     font-size: var(--text-ll);
-    font-weight: 750;
+    font-weight: var(--font-weight-b);
     text-decoration: none;
     white-space: nowrap;
 }
@@ -362,7 +413,7 @@ main,
     color: var(--color-muted);
     border-radius: var(--radius-m);
     font-size: var(--text-s);
-    font-weight: 650;
+    font-weight: var(--font-weight-b);
     text-decoration: none;
     white-space: nowrap;
     transition:
@@ -381,10 +432,12 @@ main,
     gap: var(--space-ss);
 }
 
-/* 7. Hero */
+/* =========================================================
+   7. 首屏：姓名、简介、个人信息、头像
+   ========================================================= */
 .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-columns: minmax(0, 1fr) var(--profile-card-width);
     gap: var(--space-lll);
     align-items: center;
     min-height: calc(100svh - var(--header-height));
@@ -392,7 +445,7 @@ main,
 }
 
 .hero-copy {
-    max-width: 760px;
+    max-width: var(--hero-copy-width);
 }
 
 .identity-meta {
@@ -402,15 +455,12 @@ main,
 .profile-role {
     margin: 0 0 var(--space-s);
     color: var(--color-primary);
-    font-weight: 780;
+    font-weight: var(--font-weight-bb);
 }
 
 .profile-card {
     align-self: center;
     overflow: hidden;
-    background: var(--color-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-m);
     box-shadow: var(--shadow-panel);
 }
 
@@ -422,7 +472,9 @@ main,
     background: var(--color-soft);
 }
 
-/* 8. Work */
+/* =========================================================
+   8. 科研与项目经历
+   ========================================================= */
 .work-list {
     display: grid;
     gap: var(--space-l);
@@ -444,7 +496,9 @@ main,
     color: var(--color-body);
 }
 
-/* 9. Timeline */
+/* =========================================================
+   9. 教育与工作经历时间轴
+   ========================================================= */
 .timeline {
     position: relative;
     display: grid;
@@ -456,26 +510,26 @@ main,
     top: var(--space-s);
     bottom: var(--space-s);
     left: var(--space-s);
-    width: 2px;
-    background: rgba(25, 122, 99, 0.22);
+    width: var(--timeline-line-width);
+    background: var(--color-timeline-line);
     content: "";
 }
 
 .timeline-item {
     position: relative;
     display: grid;
-    grid-template-columns: 26px minmax(0, 1fr);
+    grid-template-columns: var(--timeline-marker-size) minmax(0, 1fr);
     gap: var(--space-l);
 }
 
 .timeline-marker {
     position: relative;
     z-index: 1;
-    width: 26px;
-    height: 26px;
+    width: var(--timeline-marker-size);
+    height: var(--timeline-marker-size);
     margin-top: var(--space-l);
     background: var(--color-page);
-    border: 7px solid var(--color-accent);
+    border: var(--timeline-marker-border) solid var(--color-accent);
     border-radius: 50%;
 }
 
@@ -489,7 +543,7 @@ main,
 
 .timeline-body {
     position: relative;
-    padding-right: 200px;
+    padding-right: var(--timeline-date-width);
 }
 
 .timeline-body p {
@@ -507,10 +561,12 @@ main,
     right: var(--space-l);
     color: var(--color-accent);
     font-size: var(--text-s);
-    font-weight: 650;
+    font-weight: var(--font-weight-b);
 }
 
-/* 10. Publications */
+/* =========================================================
+   10. 学术成果列表
+   ========================================================= */
 .publication-block {
     margin-top: var(--space-ll);
 }
@@ -538,13 +594,13 @@ main,
     grid-column: 1 / -1;
     align-items: center;
     width: fit-content;
-    min-height: 26px;
+    min-height: var(--timeline-marker-size);
     padding: 0 var(--space-ss);
     color: var(--color-accent);
-    background: #e7f3ee;
+    background: var(--color-publication-index-bg);
     border-radius: var(--radius-m);
     font-size: var(--text-sss);
-    font-weight: 800;
+    font-weight: var(--font-weight-bb);
     content: "[" counter(publication) "]";
 }
 
@@ -562,7 +618,7 @@ main,
 }
 
 .publication-title {
-    font-weight: 720;
+    font-weight: var(--font-weight-b);
 }
 
 .publication-venue {
@@ -577,21 +633,23 @@ main,
 }
 
 .publication-links a {
-    min-height: 30px;
+    min-height: calc(var(--space-l) + var(--space-ss));
     padding: var(--space-sss) var(--space-s);
     color: var(--color-primary);
-    background: #f0f6fc;
+    background: var(--color-link-surface);
     border-radius: var(--radius-m);
     font-size: var(--text-ss);
-    font-weight: 760;
+    font-weight: var(--font-weight-bb);
     text-decoration: none;
 }
 
 .publication-links a:hover {
-    background: #e1edf8;
+    background: var(--color-link-surface-hover);
 }
 
-/* 11. Honors and Contact */
+/* =========================================================
+   11. 荣誉、联系、页脚
+   ========================================================= */
 .honor-list {
     display: grid;
     gap: var(--space-m);
@@ -621,14 +679,16 @@ main,
 .site-footer {
     padding: var(--space-ll) 0 var(--space-lll);
     color: var(--color-muted);
-    border-top: 1px solid var(--color-border);
+    border-top: var(--border-width) solid var(--color-border);
     font-size: var(--text-s);
 }
 
-/* 12. Responsive */
+/* =========================================================
+   12. 响应式：只放覆盖规则，不在这里重新定义主题
+   ========================================================= */
 @media (max-width: 900px) {
     :root {
-        --header-height: 64px;
+        --header-height: var(--header-height-compact);
     }
 
     .site-header {
@@ -668,7 +728,7 @@ main,
     }
 
     .profile-card {
-        width: min(320px, 100%);
+        width: min(var(--profile-card-width), var(--profile-card-mobile-width));
     }
 
     .contact-links {
@@ -690,12 +750,12 @@ main,
     }
 
     .text-button {
-        min-height: 36px;
+        min-height: calc(var(--space-l) + var(--space-s));
         padding: 0 var(--space-s);
     }
 
     h1 {
-        font-size: 42px;
+        font-size: var(--heading-m);
     }
 
     .lead,
@@ -751,11 +811,11 @@ main,
     }
 
     .profile-card {
-        width: 100%;
+        width: var(--profile-card-mobile-width);
     }
 
     .profile-photo {
-        max-height: 320px;
+        max-height: var(--profile-photo-mobile-height);
     }
 
     .action-link {
