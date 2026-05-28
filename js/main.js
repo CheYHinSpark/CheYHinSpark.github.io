@@ -212,7 +212,7 @@
             entry.className = "timeline-item";
 
             var marker = document.createElement("div");
-            marker.className = "timeline-marker " + item.position;
+            marker.className = "timeline-marker " + (item.position || "");
             entry.appendChild(marker);
 
             var body = document.createElement("div");
@@ -227,10 +227,12 @@
             meta.textContent = item.meta;
             body.appendChild(meta);
 
-            var duration = document.createElement("p");
-            duration.className = "top-right";
-            duration.textContent = item.duration;
-            body.appendChild(duration)
+            if (item.duration) {
+                var duration = document.createElement("p");
+                duration.className = "top-right";
+                duration.textContent = item.duration;
+                body.appendChild(duration);
+            }
 
             body.appendChild(createParagraph(item.description));
             entry.appendChild(body);
