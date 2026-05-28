@@ -686,7 +686,7 @@ main,
 /* =========================================================
    12. 响应式：只放覆盖规则，不在这里重新定义主题
    ========================================================= */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
     :root {
         --header-height: var(--header-height-compact);
     }
@@ -736,7 +736,7 @@ main,
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
     body {
         font-size: var(--text-s);
     }
@@ -804,7 +804,7 @@ main,
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
     main,
     .site-footer {
         width: min(100% - var(--space-l), var(--content-width));
