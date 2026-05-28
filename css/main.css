@@ -471,8 +471,15 @@ h2 {
     height: 26px;
     margin-top: 18px;
     background: var(--color-page);
-    border: 7px solid var(--color-accent);
     border-radius: 50%;
+}
+
+.timeline-marker.job {
+    border: 7px solid var(--color-primary);
+}
+
+.timeline-marker.edu {
+    border: 7px solid var(--color-accent);
 }
 
 .timeline-body {
@@ -486,6 +493,15 @@ h2 {
 .timeline-body > p:last-child {
     margin-top: 12px;
     color: var(--color-muted);
+}
+
+.top-right {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: var(--color-accent);
+    font-size: 15px;
+    font-weight: 650;
 }
 
 .publication-block {
