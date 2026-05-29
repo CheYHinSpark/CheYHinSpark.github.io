@@ -1,6 +1,14 @@
 /* =========================================================
    1. 全局变量：日常调风格时，优先只改这一块
    ========================================================= */
+@font-face {
+    font-family: "Beleren2016";
+    src: url("../fonts/Beleren2016-Bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
 :root {
     /* 颜色：页面正文、卡片、链接、强调色都集中在这里 */
     --color-ink: #102030;
@@ -55,6 +63,7 @@
     --font-weight-bb: 800;
     --line-tight: 1.15;
     --line-base: 1.5;
+    --line-button: 1;
     --line-card-title: 1.35;
     --line-meta: 1.5;
 
@@ -75,13 +84,11 @@
     --profile-card-mobile-width: 80%;
     --profile-photo-mobile-height: 320px;
 
-    /* 顶栏与响应式断点 */
+    /* 顶栏与响应式断点：默认是电脑横屏；小于此宽度按手机竖屏处理。 */
     --header-height: 72px;
     --header-height-compact: 64px;
-    /* 注意：原生 CSS 的 @media 不能直接使用变量，下面数值需要和响应式区手动保持一致。 */
-    --breakpoint-tablet: 960px;
-    --breakpoint-phone: 640px;
-    --breakpoint-narrow: 480px;
+    /* 注意：原生 CSS 的 @media 不能直接使用变量，下面 720px 需要和响应式区手动保持一致。 */
+    --breakpoint-mobile: 720px;
 
     /* 小装饰尺寸：时间轴、列表圆点、链接下划线等 */
     --timeline-marker-size: 26px;
@@ -95,6 +102,18 @@
     --nav-blur: 16px;
 
     --font-sans: "Inter", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    --font-serif-cn: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+    --font-display-en: "Beleren2016", var(--font-sans);
+    --font-display: var(--font-serif-cn);
+}
+
+/* 中文模式用宋体系；英文模式用 Beleren。JS 切换 documentElement.lang 后自动生效。 */
+html[lang^="zh"] {
+    --font-display: var(--font-serif-cn);
+}
+
+html[lang="en"] {
+    --font-display: var(--font-display-en);
 }
 
 /* =========================================================
@@ -157,6 +176,7 @@ h1 {
 
 h2 {
     margin: var(--space-ss) 0 0;
+    font-family: var(--font-display);
     font-size: var(--heading-m);
     line-height: var(--line-tight);
 }
@@ -171,9 +191,9 @@ h3 {
 .item-type {
     margin: 0;
     color: var(--color-accent);
+    font-family: var(--font-display);
     font-size: var(--text-ss);
     font-weight: var(--font-weight-bb);
-    text-transform: uppercase;
 }
 
 .lead,
@@ -237,6 +257,7 @@ main,
 .compact-link {
     border-radius: var(--radius-m);
     font: inherit;
+    line-height: var(--line-button);
     transition:
         background-color var(--transition-m),
         border-color var(--transition-m),
@@ -245,12 +266,16 @@ main,
 }
 
 .text-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: calc(var(--space-l) + var(--space-m));
     padding: 0 var(--space-s);
     color: var(--color-ink);
     background: transparent;
     border: var(--border-width) solid var(--color-border-strong);
     cursor: pointer;
+    font-family: var(--font-display);
     font-size: var(--text-s);
     font-weight: var(--font-weight-b);
 }
@@ -280,6 +305,7 @@ main,
     color: var(--color-primary);
     background: var(--color-panel);
     border: var(--border-width) solid var(--color-primary-border);
+    font-family: var(--font-display);
     font-size: var(--text-s);
     font-weight: var(--font-weight-b);
     text-decoration: none;
@@ -397,6 +423,7 @@ main,
 
 .brand {
     color: var(--color-ink);
+    font-family: var(--font-display);
     font-size: var(--text-ll);
     font-weight: var(--font-weight-b);
     text-decoration: none;
@@ -413,6 +440,7 @@ main,
     padding: var(--space-ss) var(--space-s);
     color: var(--color-muted);
     border-radius: var(--radius-m);
+    font-family: var(--font-display);
     font-size: var(--text-s);
     font-weight: var(--font-weight-b);
     text-decoration: none;
@@ -595,6 +623,7 @@ main,
     grid-column: 1;
     grid-row: 1;
     align-items: center;
+    justify-content: center;
     width: fit-content;
     min-height: var(--timeline-marker-size);
     padding: 0 var(--space-ss);
@@ -603,6 +632,7 @@ main,
     border-radius: var(--radius-m);
     font-size: var(--text-sss);
     font-weight: var(--font-weight-bb);
+    line-height: var(--line-button);
     content: "[" counter(publication) "]";
 }
 
@@ -639,13 +669,18 @@ main,
 }
 
 .publication-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: calc(var(--space-l) + var(--space-ss));
     padding: var(--space-sss) var(--space-s);
     color: var(--color-primary);
     background: var(--color-link-surface);
     border-radius: var(--radius-m);
+    font-family: var(--font-display);
     font-size: var(--text-ss);
     font-weight: var(--font-weight-bb);
+    line-height: var(--line-button);
     text-decoration: none;
 }
 
@@ -690,17 +725,30 @@ main,
 }
 
 /* =========================================================
-   12. 响应式：只放覆盖规则，不在这里重新定义主题
+   12. 响应式：默认电脑横屏；这里统一处理手机竖屏
    ========================================================= */
-@media (max-width: 960px) {
+@media (max-width: 720px) {
     :root {
         --header-height: var(--header-height-compact);
+    }
+
+    body {
+        font-size: var(--text-s);
+    }
+
+    main,
+    .site-footer {
+        width: min(100% - var(--space-l), var(--content-width));
     }
 
     .site-header {
         grid-template-columns: 1fr auto;
         gap: var(--space-s);
         padding: var(--space-s) var(--space-l);
+    }
+
+    .brand {
+        font-size: var(--text-l);
     }
 
     .site-nav {
@@ -714,41 +762,6 @@ main,
 
     .site-nav::-webkit-scrollbar {
         display: none;
-    }
-
-    main,
-    .site-footer {
-        width: min(100% - var(--space-ll), var(--content-width));
-    }
-
-    .hero,
-    .summary-grid,
-    .contact-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        gap: var(--space-ll);
-        min-height: 0;
-        padding: var(--space-lll) 0;
-    }
-
-    .profile-card {
-        width: min(var(--profile-card-width), var(--profile-card-mobile-width));
-    }
-
-    .contact-links {
-        justify-content: flex-start;
-    }
-}
-
-@media (max-width: 640px) {
-    body {
-        font-size: var(--text-s);
-    }
-
-    .brand {
-        font-size: var(--text-l);
     }
 
     .text-button {
@@ -766,6 +779,18 @@ main,
     }
 
     .section {
+        padding: var(--space-lll) 0;
+    }
+
+    .hero,
+    .summary-grid,
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        gap: var(--space-ll);
+        min-height: 0;
         padding: var(--space-lll) 0;
     }
 
@@ -821,17 +846,6 @@ main,
 
     .compact-link {
         justify-self: start;
-    }
-}
-
-@media (max-width: 480px) {
-    main,
-    .site-footer {
-        width: min(100% - var(--space-l), var(--content-width));
-    }
-
-    .profile-card {
-        width: var(--profile-card-mobile-width);
     }
 
     .profile-photo {
