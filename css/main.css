@@ -230,7 +230,7 @@ main,
 }
 
 .section {
-    padding: var(--space-llll) 0;
+    padding: var(--space-lll) ;
     border-top: var(--border-width) solid var(--color-border);
     scroll-margin-top: calc(var(--header-height) + var(--space-l));
 }
@@ -245,7 +245,7 @@ main,
 .contact-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
-    gap: var(--space-ll);
+    gap: var(--space-l);
     align-items: start;
 }
 
@@ -602,7 +602,7 @@ main,
 
 .publication-list {
     display: grid;
-    gap: var(--space-m);
+    gap: var(--space-s);
     margin: var(--space-m) 0 0;
     padding: 0;
     list-style: none;
@@ -693,7 +693,7 @@ main,
    ========================================================= */
 .honor-list {
     display: grid;
-    gap: var(--space-m);
+    gap: var(--space-s);
 }
 
 .honor-item p,
@@ -714,7 +714,7 @@ main,
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: var(--space-s);
+    gap: var(--space-ss);
 }
 
 .site-footer {
@@ -789,7 +789,7 @@ main,
     }
 
     .hero {
-        gap: var(--space-ll);
+        gap: var(--space-l);
         min-height: 0;
         padding: var(--space-lll) 0;
     }
