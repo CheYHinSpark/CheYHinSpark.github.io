@@ -66,22 +66,22 @@ window.SITE_CONTENT = {
             title: "教育与工作经历",
             items: [
                 {
-                    title: "清华大学电子工程系",
-                    meta: "博士后",
+                    title: "博士后",
+                    affiliation: "清华大学电子工程系",
                     position: "job",
                     duration: "2025年7月——2027年6月",
                     description: "研究兴趣扩展到大语言模型、智能体系统、科学计算和科研流程自动化。"
                 },
                 {
-                    title: "清华大学数学科学系",
-                    meta: "博士",
+                    title: "博士",
+                    affiliation: "清华大学数学科学系",
                     position: "edu",
                     duration: "2020年9月——2025年6月",
                     description: "研究动理学方程的模型约化与数值求解，完成离散速度方向模型和 Poisson 核积分矩方法相关工作。"
                 },
                 {
-                    title: "清华大学数学科学系",
-                    meta: "本科",
+                    title: "本科",
+                    affiliation: "清华大学数学科学系",
                     position: "edu",
                     duration: "2016年8月——2020年7月",
                     description: "接受数学、建模和理论分析训练，为后续算法研究打下基础。"
@@ -160,22 +160,22 @@ window.SITE_CONTENT = {
             title: "Education and Work Experience",
             items: [
                 {
-                    title: "Department of Electronic Engineering, Tsinghua University",
-                    meta: "Postdoctoral Researcher",
+                    title: "Postdoctoral Researcher",
+                    affiliation: "Department of Electronic Engineering, Tsinghua University",
                     position: "job",
                     duration: "July 2025--June 2027",
                     description: "Expanding my research focus toward large language models, agent systems, scientific computing, and automated research workflows."
                 },
                 {
-                    title: "Department of Mathematical Sciences, Tsinghua University",
-                    meta: "Ph.D.",
+                    title: "Ph.D.",
+                    affiliation: "Department of Mathematical Sciences, Tsinghua University",
                     position: "edu",
                     duration: "Sept. 2020--June 2025",
                     description: "Studied model reduction and numerical computation for kinetic equations, including discrete-velocity-direction models and Poisson-kernel-based moment methods."
                 },
                 {
-                    title: "Department of Mathematical Sciences, Tsinghua University",
-                    meta: "B.S.",
+                    title: "B.S.",
+                    affiliation: "Department of Mathematical Sciences, Tsinghua University",
                     position: "edu",
                     duration: "Oct. 2016--July 2020",
                     description: "Built a foundation in mathematics, modeling, and theoretical analysis for later algorithmic research."

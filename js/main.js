@@ -205,18 +205,18 @@
             body.className = "timeline-body";
 
             // 内容
-            var title = document.createElement("h3");
+            var title = document.createElement("text");
+            title.className = "item-type";
             title.textContent = item.title;
             body.appendChild(title);
 
-            var meta = document.createElement("p");
-            meta.className = "item-type";
-            meta.textContent = item.meta;
-            body.appendChild(meta);
+            var affiliation = document.createElement("text");
+            affiliation.textContent = item.affiliation;
+            body.appendChild(affiliation);
 
             if (item.duration) {
                 var duration = document.createElement("p");
-                duration.className = "top-right";
+                duration.className = "timeline-time";
                 duration.textContent = item.duration;
                 body.appendChild(duration);
             }

@@ -21,14 +21,12 @@
     --color-primary: #0369cf;
     --color-primary-strong: #0248ab;
     --color-accent: #028a46;
-    --color-warm: #cf6903;
 
     /* 颜色：状态、边框、浅色底，只在组件中复用 */
     --color-header-bg: rgba(255, 255, 255, 0.9);
     --color-focus: rgba(25, 122, 99, 0.28);
     --color-border: rgba(100, 112, 132, 0.16);
     --color-border-strong: rgba(100, 112, 132, 0.28);
-    --color-primary-border: rgba(16, 89, 168, 0.24);
     --color-timeline-line: rgba(25, 122, 99, 0.22);
     --color-link-surface: #f0f6fc;
     --color-link-surface-hover: #e1edf8;
@@ -65,7 +63,6 @@
     --line-base: 1.5;
     --line-button: 1;
     --line-card-title: 1.35;
-    --line-meta: 1.5;
 
     /* 圆角、边框、阴影、动效 */
     --radius-m: 8px;
@@ -73,30 +70,23 @@
     --focus-width: 3px;
     --shadow-panel: 0 18px 45px var(--color-shadow-panel);
     --transition-m: 0.18s ease;
-    --motion-lift: -1px;
 
     /* 页面主要尺寸 */
     --content-width: 1120px;
     --section-heading-width: 780px;
     --hero-copy-width: 760px;
-    --sidebar-width: 330px;
     --profile-card-width: 320px;
-    --profile-card-mobile-width: 80%;
+    --profile-card-mobile-width: 50%;
     --profile-photo-mobile-height: 320px;
 
     /* 顶栏与响应式断点：默认是电脑横屏；小于此宽度按手机竖屏处理。 */
     --header-height: 72px;
     --header-height-compact: 64px;
-    /* 注意：原生 CSS 的 @media 不能直接使用变量，下面 720px 需要和响应式区手动保持一致。 */
-    --breakpoint-mobile: 720px;
 
-    /* 小装饰尺寸：时间轴、列表圆点、链接下划线等 */
+    /* 小装饰尺寸：时间轴和链接下划线 */
     --timeline-marker-size: 26px;
     --timeline-marker-border: 7px;
     --timeline-line-width: 2px;
-    --timeline-date-width: 200px;
-    --list-dot-size: 6px;
-    --list-dot-top: 0.72em;
     --link-underline-width: 0.08em;
     --link-underline-offset: 0.24em;
     --nav-blur: 16px;
@@ -215,7 +205,7 @@ h3 {
 }
 
 /* =========================================================
-   4. 页面骨架：容器宽度、章节距离、双栏布局
+   4. 页面骨架：容器宽度与章节距离
    ========================================================= */
 main,
 .site-footer {
@@ -224,7 +214,7 @@ main,
 }
 
 .section {
-    padding: var(--space-lll) ;
+    padding: var(--space-lll);
     border-top: var(--border-width) solid var(--color-border);
     scroll-margin-top: calc(var(--header-height) + var(--space-l));
 }
@@ -238,14 +228,6 @@ main,
    5. 通用组件：按钮、标签、列表、卡片
    ========================================================= */
 .text-button {
-    border-radius: var(--radius-m);
-    font: inherit;
-    line-height: var(--line-button);
-    transition:
-        background-color var(--transition-m),
-        border-color var(--transition-m),
-        color var(--transition-m),
-        transform var(--transition-m);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -254,10 +236,17 @@ main,
     color: var(--color-ink);
     background: transparent;
     border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-m);
     cursor: pointer;
+    font: inherit;
     font-family: var(--font-display);
     font-size: var(--text-s);
     font-weight: var(--font-weight-b);
+    line-height: var(--line-button);
+    transition:
+        background-color var(--transition-m),
+        border-color var(--transition-m),
+        color var(--transition-m);
 }
 
 .text-button:hover {
@@ -303,14 +292,13 @@ main,
     gap: var(--space-ss);
     color: var(--color-muted);
     font-size: var(--text-s);
-    line-height: var(--line-meta);
+    line-height: var(--line-base);
 }
 
 /* 白底卡片的共用底座：新增卡片时优先复用这组视觉 */
 .projects-item,
 .timeline-body,
 .outputs-list li,
-.honor-item,
 .profile-card {
     background: var(--color-panel);
     border: var(--border-width) solid var(--color-border);
@@ -318,8 +306,7 @@ main,
 }
 
 .projects-item,
-.timeline-body,
-.honor-item {
+.timeline-body {
     padding: var(--space-l);
 }
 
@@ -424,10 +411,6 @@ main,
 }
 
 .projects-item-header {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: var(--space-l);
     margin-bottom: var(--space-m);
 }
 
@@ -480,13 +463,14 @@ main,
     border-color: var(--color-primary);
 }
 
-.timeline-marker.edu {
-    border-color: var(--color-accent);
-}
-
 .timeline-body {
     position: relative;
-    padding-right: var(--timeline-date-width);
+}
+
+.timeline-body text {
+    margin: 0;
+    margin-right: var(--space-l);
+    font-size: var(--text-m);
 }
 
 .timeline-body p {
@@ -498,7 +482,7 @@ main,
     color: var(--color-muted);
 }
 
-.top-right {
+.timeline-time {
     position: absolute;
     top: var(--space-l);
     right: var(--space-l);
@@ -610,15 +594,6 @@ main,
     gap: var(--space-s);
 }
 
-.honor-item p {
-    margin: 0;
-}
-
-.honor-item > p:last-child {
-    margin-top: var(--space-s);
-    color: var(--color-muted);
-}
-
 .site-footer {
     padding: var(--space-ll) 0 var(--space-lll);
     color: var(--color-muted);
@@ -686,9 +661,6 @@ main,
 
     .hero {
         grid-template-columns: 1fr;
-    }
-
-    .hero {
         gap: var(--space-l);
         min-height: 0;
         padding: var(--space-lll) 0;
@@ -702,7 +674,6 @@ main,
 
     .projects-item,
     .timeline-body,
-    .honor-item,
     .outputs-list li {
         padding: var(--space-m);
     }
@@ -711,35 +682,18 @@ main,
         padding-right: var(--space-m);
     }
 
-    .top-right {
+    .timeline-time {
         position: static;
         margin-top: var(--space-ss);
     }
 
     .outputs-list li {
         gap: var(--space-s);
-        grid-template-columns: auto minmax(0, 1fr) auto;
-    }
-
-    .projects-item-header {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--space-s);
-    }
-
-    .outputs-list li::before {
-        grid-column: 1;
-        grid-row: 1;
     }
 
     .outputs-main {
         grid-column: 1 / -1;
         grid-row: 2;
-    }
-
-    .outputs-links {
-        grid-column: 3;
-        grid-row: 1;
     }
 
     .profile-photo {
