@@ -76,12 +76,10 @@
         renderNav(content.nav);
         renderHero(content);
         renderProfile(content.profile);
-        renderSummary(content.summary);
         renderExperience(content.experience);
-        renderWork(content.work);
-        renderPublications(content.publications);
+        renderProjects(content.projects);
+        renderOutputs(content.outputs);
         renderHonors(content.honors);
-        renderContact(content.contact);
         setText("footer-text", content.footer);
     }
 
@@ -102,80 +100,70 @@
         });
     }
 
-    // 首屏内容：姓名、简介、关键词标签。
+    // 首屏内容：姓名、头像、简介、地址、邮箱、关键词标签。
     function renderHero(content) {
-        var hero = content.hero;
-        setText("profile-name", hero.name);
-        setText("hero-lead", hero.lead);
-        renderTagList("hero-tags", hero.tags);
-    }
-
-    // 个人信息：头像 alt、身份、单位、地址和邮箱。
-    function renderProfile(profile) {
         var shared = getSharedContent();
-
-        setText("profile-role", profile.role);
-
+        var hero = content.hero;
+        // 姓名
+        setText("profile-name", hero.name);
+        // 头像
         var photo = document.getElementById("profile-photo");
         if (photo) {
             if (shared.profilePhoto) {
                 photo.setAttribute("src", shared.profilePhoto);
             }
-            photo.setAttribute("alt", profile.alt);
         }
-
+        // 简介
+        setText("hero-lead", hero.lead);
+        // 地址和邮箱
         var list = document.getElementById("profile-lines");
-        if (!list) {
-            return;
-        }
-
         clearElement(list);
-        getProfileLines(profile, shared).forEach(function (line) {
+
+        hero.address.forEach(function (line) {
             var item = document.createElement("li");
             item.textContent = line;
             list.appendChild(item);
         });
+        shared.emails.forEach(function (line) {
+            var item = document.createElement("li");
+            item.textContent = line;
+            list.appendChild(item);
+        });
+
+        renderTagList("hero-tags", hero.tags);
     }
 
     // 简介区：正文段落和右侧能力关键词。
-    function renderSummary(summary) {
-        setText("summary-kicker", summary.kicker);
-        setText("summary-title", summary.title);
-        setText("target-title", summary.targetTitle);
+    function renderProfile(profile) {
+        setText("profile-title", profile.title);
 
-        var copy = document.getElementById("summary-copy");
+        var copy = document.getElementById("profile-copy");
         if (copy) {
             clearElement(copy);
-            summary.paragraphs.forEach(function (paragraph) {
+            profile.paragraphs.forEach(function (paragraph) {
                 copy.appendChild(createParagraph(paragraph));
             });
         }
-
-        renderSimpleList("target-list", summary.targetRoles);
     }
 
-    // 科研与项目经历：每一项由 createWorkItem 生成一张卡片。
-    function renderWork(work) {
-        setText("work-kicker", work.kicker);
-        setText("work-title", work.title);
+    // 科研与项目经历：每一项由 createprojectsItem 生成一张卡片。
+    function renderProjects(projects) {
+        setText("projects-title", projects.title);
 
-        var list = document.getElementById("work-list");
-        if (!list) {
-            return;
-        }
+        var list = document.getElementById("projects-list");
 
         clearElement(list);
-        work.items.forEach(function (item) {
-            list.appendChild(createWorkItem(item));
+        projects.items.forEach(function (item) {
+            list.appendChild(createProjectsItem(item));
         });
     }
 
-    function createWorkItem(item) {
+    function createProjectsItem(item) {
         var article = document.createElement("article");
-        article.className = "work-item";
+        article.className = "projects-item";
 
         var header = document.createElement("div");
-        header.className = "work-item-header";
+        header.className = "projects-item-header";
 
         var titleGroup = document.createElement("div");
         var title = document.createElement("h3");
@@ -188,34 +176,14 @@
         titleGroup.appendChild(type);
         header.appendChild(titleGroup);
 
-        if (item.href) {
-            var link = document.createElement("a");
-            link.className = "compact-link";
-            link.href = item.href;
-            link.target = "_blank";
-            link.rel = "noopener";
-            link.textContent = item.hrefLabel || "Link";
-            header.appendChild(link);
-        }
-
         article.appendChild(header);
         article.appendChild(createParagraph(item.description));
-
-        var points = document.createElement("ul");
-        points.className = "clean-list";
-        item.points.forEach(function (point) {
-            var pointItem = document.createElement("li");
-            pointItem.textContent = point;
-            points.appendChild(pointItem);
-        });
-        article.appendChild(points);
 
         return article;
     }
 
     // 教育与工作经历：position 决定时间轴圆点颜色，duration 决定右上角时间。
     function renderExperience(experience) {
-        setText("experience-kicker", experience.kicker);
         setText("experience-title", experience.title);
 
         var list = document.getElementById("experience-list");
@@ -225,6 +193,7 @@
 
         clearElement(list);
         experience.items.forEach(function (item) {
+            // 时间线装饰
             var entry = document.createElement("article");
             entry.className = "timeline-item";
 
@@ -235,6 +204,7 @@
             var body = document.createElement("div");
             body.className = "timeline-body";
 
+            // 内容
             var title = document.createElement("h3");
             title.textContent = item.title;
             body.appendChild(title);
@@ -258,18 +228,16 @@
     }
 
     // 学术成果：按 published / preprint 自动拆成两组列表。
-    function renderPublications(copy) {
-        setText("publications-kicker", copy.kicker);
-        setText("publications-title", copy.title);
-        setText("publications-note", copy.note);
+    function renderOutputs(copy) {
+        setText("outputs-title", copy.title);
         setText("published-title", copy.publishedTitle);
         setText("preprint-title", copy.preprintTitle);
 
-        renderPublicationList("published-list", "published");
-        renderPublicationList("preprint-list", "preprint");
+        renderOutputsList("published-list", "published");
+        renderOutputsList("preprint-list", "preprint");
     }
 
-    function renderPublicationList(listId, status) {
+    function renderOutputsList(listId, status) {
         var list = document.getElementById(listId);
         if (!list) {
             return;
@@ -278,23 +246,23 @@
         clearElement(list);
 
         window.SITE_PUBLICATIONS
-            .filter(function (publication) {
-                return publication.status === status;
+            .filter(function (outputs) {
+                return outputs.status === status;
             })
-            .forEach(function (publication) {
-                list.appendChild(createPublicationItem(publication));
+            .forEach(function (outputs) {
+                list.appendChild(createOutputsItem(outputs));
             });
     }
 
-    function createPublicationItem(publication) {
+    function createOutputsItem(outputs) {
         var item = document.createElement("li");
 
         var main = document.createElement("div");
-        main.className = "publication-main";
+        main.className = "outputs-main";
 
         var authors = document.createElement("p");
-        authors.className = "publication-authors";
-        publication.authors.forEach(function (author, index) {
+        authors.className = "outputs-authors";
+        outputs.authors.forEach(function (author, index) {
             if (index > 0) {
                 authors.appendChild(document.createTextNode(", "));
             }
@@ -310,15 +278,15 @@
         authors.appendChild(document.createTextNode("."));
 
         var title = document.createElement("p");
-        title.className = "publication-title";
-        title.textContent = publication.title + ".";
+        title.className = "outputs-title";
+        title.textContent = outputs.title + ".";
 
         var venue = document.createElement("p");
-        venue.className = "publication-venue";
+        venue.className = "outputs-venue";
         var venueName = document.createElement("em");
-        venueName.textContent = publication.venue;
+        venueName.textContent = outputs.venue;
         venue.appendChild(venueName);
-        venue.appendChild(document.createTextNode(", " + publication.detail + "."));
+        venue.appendChild(document.createTextNode(", " + outputs.detail + "."));
 
         main.appendChild(authors);
         main.appendChild(title);
@@ -326,8 +294,8 @@
         item.appendChild(main);
 
         var links = document.createElement("div");
-        links.className = "publication-links";
-        publication.links.forEach(function (linkData) {
+        links.className = "outputs-links";
+        outputs.links.forEach(function (linkData) {
             var link = document.createElement("a");
             link.href = linkData.href;
             link.target = "_blank";
@@ -342,24 +310,11 @@
 
     // 荣誉区：items 为空时显示 emptyText，避免页面出现空白章节。
     function renderHonors(honors) {
-        setText("honors-kicker", honors.kicker);
         setText("honors-title", honors.title);
-        setText("honors-note", honors.note);
 
         var list = document.getElementById("honor-list");
-        if (!list) {
-            return;
-        }
 
         clearElement(list);
-
-        if (!honors.items.length) {
-            var empty = document.createElement("p");
-            empty.className = "empty-state";
-            empty.textContent = honors.emptyText;
-            list.appendChild(empty);
-            return;
-        }
 
         honors.items.forEach(function (honor) {
             list.appendChild(createHonorItem(honor));
@@ -368,58 +323,24 @@
 
     function createHonorItem(honor) {
         var item = document.createElement("article");
-        item.className = "honor-item";
+        // item.className = "honor-item";
 
-        var title = document.createElement("h3");
-        title.textContent = honor.title;
-        item.appendChild(title);
+        // var title = document.createElement("h3");
+        // title.textContent = honor.title;
+        // item.appendChild(title);
 
-        if (honor.meta) {
-            var meta = document.createElement("p");
-            meta.className = "item-type";
-            meta.textContent = honor.meta;
-            item.appendChild(meta);
-        }
+        // if (honor.meta) {
+        //     var meta = document.createElement("p");
+        //     meta.className = "item-type";
+        //     meta.textContent = honor.meta;
+        //     item.appendChild(meta);
+        // }
 
-        if (honor.description) {
-            item.appendChild(createParagraph(honor.description));
-        }
+        // if (honor.description) {
+        //     item.appendChild(createParagraph(honor.description));
+        // }
 
         return item;
-    }
-
-    // 联系区：mailto 链接保留当前页，PDF 等文件链接在新标签打开。
-    function renderContact(contact) {
-        setText("contact-kicker", contact.kicker);
-        setText("contact-title", contact.title);
-
-        var copy = document.getElementById("contact-copy");
-        if (copy) {
-            clearElement(copy);
-            contact.paragraphs.forEach(function (paragraph) {
-                copy.appendChild(createParagraph(paragraph));
-            });
-        }
-
-        var links = document.getElementById("contact-links");
-        if (!links) {
-            return;
-        }
-
-        clearElement(links);
-        getContactLinks(contact).forEach(function (linkData) {
-            var link = document.createElement("a");
-            link.className = "action-link";
-            link.href = linkData.href;
-            link.textContent = linkData.label;
-
-            if (!linkData.href.startsWith("mailto:")) {
-                link.target = "_blank";
-                link.rel = "noopener";
-            }
-
-            links.appendChild(link);
-        });
     }
 
     // 共享配置：邮箱、PDF 路径、头像路径等中英文一致的信息都从这里读。
@@ -436,39 +357,6 @@
         return content.hero.cvHref || "";
     }
 
-    function getProfileLines(profile, shared) {
-        if (profile.lines) {
-            return profile.lines;
-        }
-
-        return (shared.profileLines || []).concat(shared.emails || []);
-    }
-
-    function getContactLinks(contact) {
-        var labels = contact.linkLabels || {};
-        var shared = getSharedContent();
-        var sharedLinks = shared.contactLinks || contact.links || [];
-
-        return sharedLinks.map(function (linkData) {
-            return {
-                href: resolveSharedHref(linkData, shared),
-                label: linkData.label || labels[linkData.key] || linkData.key || linkData.href
-            };
-        });
-    }
-
-    function resolveSharedHref(linkData, shared) {
-        if (typeof linkData.emailIndex === "number" && shared.emails && shared.emails[linkData.emailIndex]) {
-            return "mailto:" + shared.emails[linkData.emailIndex];
-        }
-
-        if (linkData.cvLang && shared.cvHref && shared.cvHref[linkData.cvLang]) {
-            return shared.cvHref[linkData.cvLang];
-        }
-
-        return linkData.href || "";
-    }
-
     // 通用小工具：生成一组标签。
     function renderTagList(elementId, tags) {
         var list = document.getElementById(elementId);
@@ -482,21 +370,6 @@
             tag.className = "tag";
             tag.textContent = text;
             list.appendChild(tag);
-        });
-    }
-
-    // 通用小工具：生成普通列表。
-    function renderSimpleList(elementId, items) {
-        var list = document.getElementById(elementId);
-        if (!list) {
-            return;
-        }
-
-        clearElement(list);
-        items.forEach(function (text) {
-            var item = document.createElement("li");
-            item.textContent = text;
-            list.appendChild(item);
         });
     }
 

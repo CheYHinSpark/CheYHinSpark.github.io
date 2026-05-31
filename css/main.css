@@ -35,7 +35,7 @@
     --color-tag-text: #20415c;
     --color-tag-bg: #e6eef6;
     --color-tag-border: rgba(16, 89, 168, 0.12);
-    --color-publication-index-bg: #e7f3ee;
+    --color-outputs-index-bg: #e7f3ee;
     --color-shadow-panel: rgba(24, 32, 40, 0.1);
 
     /* 间距：以 m 为基准，向左变小，向右变大 */
@@ -241,7 +241,7 @@ main,
 }
 
 /* 简介和联系区使用相同的右侧栏宽度 */
-.summary-grid,
+.profile-grid,
 .contact-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
@@ -384,9 +384,9 @@ main,
 
 /* 白底卡片的共用底座：新增卡片时优先复用这组视觉 */
 .role-panel,
-.work-item,
+.projects-item,
 .timeline-body,
-.publication-list li,
+.outputs-list li,
 .honor-item,
 .empty-state,
 .profile-card {
@@ -396,7 +396,7 @@ main,
 }
 
 .role-panel,
-.work-item,
+.projects-item,
 .timeline-body,
 .honor-item,
 .empty-state {
@@ -504,12 +504,12 @@ main,
 /* =========================================================
    8. 科研与项目经历
    ========================================================= */
-.work-list {
+.projects-list {
     display: grid;
     gap: var(--space-l);
 }
 
-.work-item-header {
+.projects-item-header {
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -517,11 +517,11 @@ main,
     margin-bottom: var(--space-m);
 }
 
-.work-item p {
+.projects-item p {
     margin: 0;
 }
 
-.work-item > p {
+.projects-item > p {
     color: var(--color-body);
 }
 
@@ -596,29 +596,29 @@ main,
 /* =========================================================
    10. 学术成果列表
    ========================================================= */
-.publication-block {
+.outputs-block {
     margin-top: var(--space-ll);
 }
 
-.publication-list {
+.outputs-list {
     display: grid;
     gap: var(--space-s);
     margin: var(--space-m) 0 0;
     padding: 0;
     list-style: none;
-    counter-reset: publication;
+    counter-reset: outputs;
 }
 
-.publication-list li {
+.outputs-list li {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     gap: var(--space-l);
     align-items: start;
     padding: var(--space-l);
-    counter-increment: publication;
+    counter-increment: outputs;
 }
 
-.publication-list li::before {
+.outputs-list li::before {
     display: inline-flex;
     grid-column: 1;
     grid-row: 1;
@@ -628,38 +628,38 @@ main,
     min-height: var(--timeline-marker-size);
     padding: 0 var(--space-ss);
     color: var(--color-accent);
-    background: var(--color-publication-index-bg);
+    background: var(--color-outputs-index-bg);
     border-radius: var(--radius-m);
     font-size: var(--text-sss);
     font-weight: var(--font-weight-bb);
     line-height: var(--line-button);
-    content: "[" counter(publication) "]";
+    content: "[" counter(outputs) "]";
 }
 
-.publication-main {
+.outputs-main {
     display: grid;
     grid-column: 2;
     grid-row: 1;
     gap: var(--space-sss);
 }
 
-.publication-main p {
+.outputs-main p {
     margin: 0;
 }
 
-.publication-authors {
+.outputs-authors {
     color: var(--color-body);
 }
 
-.publication-title {
+.outputs-title {
     font-weight: var(--font-weight-b);
 }
 
-.publication-venue {
+.outputs-venue {
     color: var(--color-muted);
 }
 
-.publication-links {
+.outputs-links {
     display: flex;
     flex-wrap: wrap;
     grid-column: 3;
@@ -668,7 +668,7 @@ main,
     gap: var(--space-ss);
 }
 
-.publication-links a {
+.outputs-links a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -684,7 +684,7 @@ main,
     text-decoration: none;
 }
 
-.publication-links a:hover {
+.outputs-links a:hover {
     background: var(--color-link-surface-hover);
 }
 
@@ -783,7 +783,7 @@ main,
     }
 
     .hero,
-    .summary-grid,
+    .profile-grid,
     .contact-layout {
         grid-template-columns: 1fr;
     }
@@ -801,11 +801,11 @@ main,
     }
 
     .role-panel,
-    .work-item,
+    .projects-item,
     .timeline-body,
     .honor-item,
     .empty-state,
-    .publication-list li {
+    .outputs-list li {
         padding: var(--space-m);
     }
 
@@ -818,28 +818,28 @@ main,
         margin-top: var(--space-ss);
     }
 
-    .publication-list li {
+    .outputs-list li {
         gap: var(--space-s);
         grid-template-columns: auto minmax(0, 1fr) auto;
     }
 
-    .work-item-header {
+    .projects-item-header {
         display: grid;
         grid-template-columns: 1fr;
         gap: var(--space-s);
     }
 
-    .publication-list li::before {
+    .outputs-list li::before {
         grid-column: 1;
         grid-row: 1;
     }
 
-    .publication-main {
+    .outputs-main {
         grid-column: 1 / -1;
         grid-row: 2;
     }
 
-    .publication-links {
+    .outputs-links {
         grid-column: 3;
         grid-row: 1;
     }

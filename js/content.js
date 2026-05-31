@@ -10,101 +10,59 @@ window.SITE_SHARED = {
     cvHref: {
         zh: "cv/CV_zh.pdf",
         en: "cv/CV_en.pdf"
-    },
-    profileLines: [
-        "Department of Electronic Engineering, Tsinghua University",
-        "Rohm Building 11-309, Beijing, China"
-    ],
-    contactLinks: [
-        { key: "email", emailIndex: 0 },
-        { key: "zhCv", cvLang: "zh" },
-        { key: "enCv", cvLang: "en" }
-    ]
+    }
 };
 
 window.SITE_CONTENT = {
     zh: {
         htmlLang: "zh-CN",
         title: "陈奕宏 | Yihong Chen",
-        description: "陈奕宏的个人简历主页，聚焦数学建模、数值算法、LLM Agent、科学计算与科研自动化。",
+        description: "陈奕宏的个人主页",
         brand: "陈奕宏",
         languageToggle: "En",
         cvButton: "简历",
         // nav 的键名需要和 index.html 里的 data-nav 对应。
         nav: {
-            summary: "简介",
+            profile: "简介",
             experience: "经历",
-            work: "项目",
-            publications: "成果",
-            honors: "荣誉",
-            contact: "联系"
+            projects: "项目",
+            outputs: "成果",
+            honors: "荣誉"
         },
         // 首屏内容：姓名、简介、关键词和对应语言的简历链接。
         hero: {
             name: "陈奕宏 Yihong Chen",
             lead: "我具有动理学方程、模型约化和高效数值方法的研究训练，正在将严谨的建模与算法能力迁移到大语言模型、智能体系统、数学推理和工具化科研流程中。",
-            tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"],
-            cvLabel: "下载中文简历"
+            address: [
+                "清华大学电子工程系",
+                "罗姆楼11-309"
+            ],
+            tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"]
         },
         profile: {
-            alt: "陈奕宏",
-            role: "Postdoctoral Researcher"
-        },
-        summary: {
-            kicker: "Profile",
             title: "基本信息与个人简介",
             paragraphs: [
                 "我本科和博士均就读于清华大学数学科学系，博士期间主要研究动理学方程的模型约化与数值求解。相关工作包括离散速度方向模型，以及基于 Poisson 核的扩展积分矩方法。",
                 "当前我希望把数学建模、数值算法和科研表达能力用于更接近产业的 AI 场景，尤其关注 LLM Agent、工具调用、数学推理、科学计算和自动化研究流程。"
-            ],
-            targetTitle: "能力关键词",
-            targetRoles: [
-                "LLM Agent / AI 应用算法",
-                "数学推理与模型评测",
-                "科研自动化与工具调用工作流",
-                "科学计算、数值算法与建模"
             ]
         },
-        work: {
-            kicker: "Projects",
+        projects: {
             title: "科研与项目经历",
             items: [
                 {
-                    title: "LLM / Agent for Research Workflow",
-                    type: "当前探索方向",
-                    description: "探索大语言模型与智能体系统在科研流程中的应用，重点关注数学推理、文献分析、代码辅助推导、工具调用和科学计算任务的自动化。",
-                    points: [
-                        "适合连接研究问题、算法实现和自动化工具链。",
-                        "关注可验证、可复用、可解释的 Agent 工作流。"
-                    ]
-                },
-                {
                     title: "Poisson Quadrature Method of Moments",
                     type: "已发表研究",
-                    description: "提出基于 Poisson 核的矩方法，用于求解二维常速动理学方程，目标是在保留关键结构的同时提高降阶计算效率。",
-                    points: [
-                        "体现高维模型降阶、数值方法设计和理论分析能力。",
-                        "发表于 Multiscale Modeling and Simulation。"
-                    ],
-                    href: "https://doi.org/10.1137/23m1620181",
-                    hrefLabel: "DOI"
+                    description: "提出基于 Poisson 核的矩方法，用于求解二维常速动理学方程，目标是在保留关键结构的同时提高降阶计算效率。"
                 },
                 {
                     title: "Discrete-Velocity-Direction BGK Models",
                     type: "博士期间研究",
-                    description: "构造离散速度方向模型，将一维动理学方程求解方法系统推广到高维，并结合最小熵框架建立 BGK 型模型。",
-                    points: [
-                        "体现从问题抽象、模型构造到数值验证的完整研究链条。",
-                        "相关成果发表于 Journal of Scientific Computing。"
-                    ],
-                    href: "https://doi.org/10.1007/s10915-024-02531-3",
-                    hrefLabel: "DOI"
+                    description: "构造离散速度方向模型，将一维动理学方程求解方法系统推广到高维，并结合最小熵框架建立 BGK 型模型。"
                 }
             ]
         },
         // 经历条目：position 可用 "job" 或 "edu"，用于控制时间轴圆点颜色。
         experience: {
-            kicker: "Experience",
             title: "教育与工作经历",
             items: [
                 {
@@ -130,117 +88,75 @@ window.SITE_CONTENT = {
                 }
             ]
         },
-        publications: {
-            kicker: "Academic Output",
+        outputs: {
             title: "学术成果",
-            note: "包括正式发表论文与预印本，作为科研训练、算法能力和学术产出的集中展示。",
             publishedTitle: "正式发表",
             preprintTitle: "预印本"
         },
         // 荣誉为空时会显示 emptyText；有内容后填入 items 数组即可。
         honors: {
-            kicker: "Honors",
             title: "荣誉与奖励",
-            note: "用于集中展示奖学金、竞赛获奖、学术奖励、人才计划或其他重要荣誉。",
-            emptyText: "相关内容整理后更新。",
-            items: []
-        },
-        contact: {
-            kicker: "Contact",
-            title: "联系与简历",
-            paragraphs: [
-                "欢迎围绕 AI Agent、LLM 应用、数学推理、科学计算和研究自动化方向交流。",
-                "如果需要更完整的教育经历、论文信息和项目细节，可以查看中英文简历。"
-            ],
-            linkLabels: {
-                email: "Email",
-                zhCv: "中文简历",
-                enCv: "English CV"
-            }
+            items: [
+                {
+                    time: "",
+                    description: ""
+                },
+                {
+                    time: "",
+                    description: ""
+                }
+            ]
         },
         footer: "© Yihong Chen"
     },
     en: {
         htmlLang: "en",
         title: "Yihong Chen | 陈奕宏",
-        description: "Personal resume website of Yihong Chen, focused on mathematical modeling, numerical algorithms, LLM agents, scientific computing, and research automation.",
+        description: "Personal website of Yihong Chen",
         brand: "Yihong Chen",
         languageToggle: "中文",
         cvButton: "CV",
-        // 英文内容结构需要和中文保持一致，方便语言切换。
+        // nav 的键名需要和 index.html 里的 data-nav 对应。
         nav: {
-            summary: "Summary",
+            profile: "Profile",
             experience: "Experience",
-            work: "Projects",
-            publications: "Output",
-            honors: "Honors",
-            contact: "Contact"
+            projects: "Projects",
+            outputs: "Outputs",
+            honors: "Honors"
         },
         hero: {
             name: "Yihong Chen 陈奕宏",
             lead: "I have research training in kinetic equations, model reduction, and efficient numerical methods. I am now applying this background to large language models, agent systems, mathematical reasoning, and tool-based research workflows.",
-            tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"],
-            cvLabel: "Download English CV"
+            address: [
+                "Department of Electronic Engineering, Tsinghua University",
+                "Rohm Building 11-309, Beijing, China"
+            ],
+            tags: ["LLM Agent", "Scientific Computing", "Numerical Algorithms", "Mathematical Reasoning"]
         },
         profile: {
-            alt: "Yihong Chen",
-            role: "Postdoctoral Researcher"
-        },
-        summary: {
-            kicker: "Profile",
             title: "Basic Information and Profile",
             paragraphs: [
                 "I received my B.S. and Ph.D. training at the Department of Mathematical Sciences, Tsinghua University. My Ph.D. research focused on model reduction and numerical computation for kinetic equations, including discrete-velocity-direction models and a Poisson-kernel-based extended quadrature method of moments.",
                 "I am interested in bringing mathematical modeling, numerical algorithms, and research communication into industry-oriented AI scenarios, especially LLM agents, tool use, mathematical reasoning, scientific computing, and automated research workflows."
-            ],
-            targetTitle: "Capability keywords",
-            targetRoles: [
-                "LLM agent and AI application algorithms",
-                "Mathematical reasoning and model evaluation",
-                "Research automation and tool-use workflows",
-                "Scientific computing, numerical algorithms, and modeling"
             ]
         },
-        work: {
-            kicker: "Projects",
+        projects: {
             title: "Research and Project Experience",
             items: [
                 {
-                    title: "LLM / Agent for Research Workflow",
-                    type: "Current direction",
-                    description: "Exploring how large language models and agent systems can support research workflows, with emphasis on mathematical reasoning, literature analysis, code-assisted derivation, tool use, and scientific computing tasks.",
-                    points: [
-                        "Connects research problems, algorithmic implementation, and automated toolchains.",
-                        "Focuses on verifiable, reusable, and interpretable agent workflows."
-                    ]
-                },
-                {
                     title: "Poisson Quadrature Method of Moments",
                     type: "Published research",
-                    description: "Developed a moment method based on the Poisson kernel for 2D kinetic equations with constant-speed velocity, targeting efficient reduced-order computation while preserving key structures.",
-                    points: [
-                        "Demonstrates high-dimensional model reduction, numerical method design, and theoretical analysis.",
-                        "Published in Multiscale Modeling and Simulation."
-                    ],
-                    href: "https://doi.org/10.1137/23m1620181",
-                    hrefLabel: "DOI"
+                    description: "Developed a moment method based on the Poisson kernel for 2D kinetic equations with constant-speed velocity, targeting efficient reduced-order computation while preserving key structures."
                 },
                 {
                     title: "Discrete-Velocity-Direction BGK Models",
                     type: "PhD research",
-                    description: "Constructed discrete-velocity-direction models to systematically extend one-dimensional kinetic solvers to higher-dimensional settings under a minimum-entropy BGK framework.",
-                    points: [
-                        "Shows the full research chain from abstraction and modeling to numerical validation.",
-                        "Related results were published in Journal of Scientific Computing."
-                    ],
-                    href: "https://doi.org/10.1007/s10915-024-02531-3",
-                    hrefLabel: "DOI"
+                    description: "Constructed discrete-velocity-direction models to systematically extend one-dimensional kinetic solvers to higher-dimensional settings under a minimum-entropy BGK framework."
                 }
             ]
         },
         // position 与中文版一致：job 表示工作经历，edu 表示教育经历。
         experience: {
-            kicker: "Experience",
             title: "Education and Work Experience",
             items: [
                 {
@@ -266,33 +182,24 @@ window.SITE_CONTENT = {
                 }
             ]
         },
-        publications: {
-            kicker: "Academic Output",
+        outputs: {
             title: "Academic Output",
-            note: "This section includes peer-reviewed publications and preprints as evidence of research training, algorithmic depth, and academic output.",
             publishedTitle: "Peer-reviewed publications",
             preprintTitle: "Preprints"
         },
         // 英文荣誉内容为空时同样显示 emptyText。
         honors: {
-            kicker: "Honors",
             title: "Honors and Awards",
-            note: "For scholarships, competitions, academic awards, talent programs, or other major recognitions.",
-            emptyText: "To be updated.",
-            items: []
-        },
-        contact: {
-            kicker: "Contact",
-            title: "Contact and CV",
-            paragraphs: [
-                "I am open to conversations around AI agents, LLM applications, mathematical reasoning, scientific computing, and research automation.",
-                "For a fuller view of my education, publications, and project details, please see the Chinese or English CV."
-            ],
-            linkLabels: {
-                email: "Email",
-                zhCv: "中文简历",
-                enCv: "English CV"
-            }
+            items: [
+                {
+                    time: "",
+                    description: ""
+                },
+                {
+                    time: "",
+                    description: ""
+                }
+            ]
         },
         footer: "© Yihong Chen"
     }
