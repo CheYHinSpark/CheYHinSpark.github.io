@@ -264,24 +264,32 @@ main,
     border-color: var(--color-primary-strong);
 }
 
-.tag-list {
+.tag-list,
+.outputs-links {
     display: flex;
     flex-wrap: wrap;
+}
+
+.tag-list {
     gap: var(--space-s);
     margin-top: var(--space-l);
 }
 
-.tag {
+.tag,
+.outputs-links a {
     display: inline-flex;
     align-items: center;
     min-height: calc(var(--space-l) + var(--space-ss));
     padding: var(--space-sss) var(--space-s);
-    color: var(--color-tag-text);
-    background: var(--color-tag-bg);
-    border: var(--border-width) solid var(--color-tag-border);
     border-radius: var(--radius-m);
     font-size: var(--text-ss);
     font-weight: var(--font-weight-b);
+}
+
+.tag {
+    color: var(--color-tag-text);
+    background: var(--color-tag-bg);
+    border: var(--border-width) solid var(--color-tag-border);
 }
 
 .meta-list {
@@ -308,6 +316,18 @@ main,
 .projects-item,
 .timeline-body {
     padding: var(--space-l);
+}
+
+.projects-list,
+.timeline {
+    display: grid;
+    gap: var(--space-l);
+}
+
+.projects-item p,
+.timeline-body p,
+.outputs-main p {
+    margin: 0;
 }
 
 /* =========================================================
@@ -405,17 +425,8 @@ main,
 /* =========================================================
    8. 科研与项目经历
    ========================================================= */
-.projects-list {
-    display: grid;
-    gap: var(--space-l);
-}
-
 .projects-item-header {
     margin-bottom: var(--space-m);
-}
-
-.projects-item p {
-    margin: 0;
 }
 
 .projects-item > p {
@@ -427,8 +438,6 @@ main,
    ========================================================= */
 .timeline {
     position: relative;
-    display: grid;
-    gap: var(--space-l);
 }
 
 .timeline::before {
@@ -468,13 +477,8 @@ main,
 }
 
 .timeline-body text {
-    margin: 0;
     margin-right: var(--space-l);
     font-size: var(--text-m);
-}
-
-.timeline-body p {
-    margin: 0;
 }
 
 .timeline-body > p:last-child {
@@ -541,10 +545,6 @@ main,
     gap: var(--space-sss);
 }
 
-.outputs-main p {
-    margin: 0;
-}
-
 .outputs-authors {
     color: var(--color-body);
 }
@@ -558,8 +558,6 @@ main,
 }
 
 .outputs-links {
-    display: flex;
-    flex-wrap: wrap;
     grid-column: 3;
     grid-row: 1;
     justify-content: flex-end;
@@ -567,16 +565,10 @@ main,
 }
 
 .outputs-links a {
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    min-height: calc(var(--space-l) + var(--space-ss));
-    padding: var(--space-sss) var(--space-s);
     color: var(--color-primary);
     background: var(--color-link-surface);
-    border-radius: var(--radius-m);
     font-family: var(--font-display);
-    font-size: var(--text-ss);
     font-weight: var(--font-weight-bb);
     line-height: var(--line-button);
     text-decoration: none;
@@ -643,7 +635,6 @@ main,
 
     .text-button {
         min-height: calc(var(--space-l) + var(--space-s));
-        padding: 0 var(--space-s);
     }
 
     h1 {
@@ -676,10 +667,6 @@ main,
     .timeline-body,
     .outputs-list li {
         padding: var(--space-m);
-    }
-
-    .timeline-body {
-        padding-right: var(--space-m);
     }
 
     .timeline-time {
