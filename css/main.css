@@ -28,8 +28,6 @@
     --color-border: rgba(100, 112, 132, 0.16);
     --color-border-strong: rgba(100, 112, 132, 0.28);
     --color-timeline-line: rgba(25, 122, 99, 0.22);
-    --color-link-surface: #f0f6fc;
-    --color-link-surface-hover: #e1edf8;
     --color-tag-text: #20415c;
     --color-tag-bg: #e6eef6;
     --color-tag-border: rgba(16, 89, 168, 0.12);
@@ -93,6 +91,7 @@
 
     --font-sans: "Inter", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
     --font-serif-cn: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+    --font-academic: "Times New Roman", Times, serif;
     --font-display-en: "Beleren2016", var(--font-sans);
     --font-display: var(--font-serif-cn);
 }
@@ -264,19 +263,14 @@ main,
     border-color: var(--color-primary-strong);
 }
 
-.tag-list,
-.outputs-links {
+.tag-list {
     display: flex;
     flex-wrap: wrap;
-}
-
-.tag-list {
     gap: var(--space-s);
     margin-top: var(--space-l);
 }
 
-.tag,
-.outputs-links a {
+.tag {
     display: inline-flex;
     align-items: center;
     min-height: calc(var(--space-l) + var(--space-ss));
@@ -307,7 +301,8 @@ main,
 .projects-item,
 .timeline-body,
 .outputs-list li,
-.profile-card {
+.profile-card,
+.honor-item {
     background: var(--color-panel);
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-m);
@@ -507,13 +502,16 @@ main,
     gap: var(--space-s);
     margin: var(--space-m) 0 0;
     padding: 0;
+    font-family: var(--font-academic);
+    font-size: var(--text-m);
+    line-height: var(--line-card-title);
     list-style: none;
     counter-reset: outputs;
 }
 
 .outputs-list li {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: var(--space-l);
     align-items: start;
     padding: var(--space-l);
@@ -532,7 +530,7 @@ main,
     color: var(--color-accent);
     background: var(--color-outputs-index-bg);
     border-radius: var(--radius-m);
-    font-size: var(--text-sss);
+    font-size: var(--text-s);
     font-weight: var(--font-weight-bb);
     line-height: var(--line-button);
     content: "[" counter(outputs) "]";
@@ -557,25 +555,12 @@ main,
     color: var(--color-muted);
 }
 
-.outputs-links {
-    grid-column: 3;
-    grid-row: 1;
-    justify-content: flex-end;
-    gap: var(--space-ss);
+.outputs-meta {
+    white-space: nowrap;
 }
 
-.outputs-links a {
-    justify-content: center;
-    color: var(--color-primary);
-    background: var(--color-link-surface);
-    font-family: var(--font-display);
-    font-weight: var(--font-weight-bb);
-    line-height: var(--line-button);
-    text-decoration: none;
-}
-
-.outputs-links a:hover {
-    background: var(--color-link-surface-hover);
+.outputs-meta a {
+    margin-left: var(--space-ss);
 }
 
 /* =========================================================
@@ -584,6 +569,37 @@ main,
 .honor-list {
     display: grid;
     gap: var(--space-s);
+}
+
+.honor-item {
+    display: grid;
+    grid-template-columns: minmax(96px, auto) minmax(0, 1fr);
+    gap: var(--space-l);
+    align-items: center;
+    padding: var(--space-m) var(--space-l);
+}
+
+.honor-time {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 72px;
+    margin: 0;
+    padding: var(--space-sss) var(--space-s);
+    color: var(--color-accent);
+    background: var(--color-outputs-index-bg);
+    border-radius: var(--radius-m);
+    font-family: var(--font-display);
+    font-size: var(--text-s);
+    font-weight: var(--font-weight-bb);
+    line-height: var(--line-card-title);
+    white-space: nowrap;
+}
+
+.honor-description {
+    margin: 0;
+    color: var(--color-body);
 }
 
 .site-footer {
@@ -665,7 +681,8 @@ main,
 
     .projects-item,
     .timeline-body,
-    .outputs-list li {
+    .outputs-list li,
+    .honor-item {
         padding: var(--space-m);
     }
 
@@ -678,9 +695,8 @@ main,
         gap: var(--space-s);
     }
 
-    .outputs-main {
-        grid-column: 1 / -1;
-        grid-row: 2;
+    .outputs-list {
+        font-size: var(--text-s);
     }
 
     .profile-photo {

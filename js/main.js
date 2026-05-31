@@ -286,29 +286,29 @@
         var venueName = document.createElement("em");
         venueName.textContent = outputs.venue;
         venue.appendChild(venueName);
-        venue.appendChild(document.createTextNode(", " + outputs.detail + "."));
 
-        main.appendChild(authors);
-        main.appendChild(title);
-        main.appendChild(venue);
-        item.appendChild(main);
-
-        var links = document.createElement("div");
-        links.className = "outputs-links";
+        var meta = document.createElement("span");
+        meta.className = "outputs-meta";
+        meta.appendChild(document.createTextNode(", " + outputs.detail + "."));
         outputs.links.forEach(function (linkData) {
             var link = document.createElement("a");
             link.href = linkData.href;
             link.target = "_blank";
             link.rel = "noopener";
             link.textContent = linkData.label;
-            links.appendChild(link);
+            meta.appendChild(link);
         });
-        item.appendChild(links);
+        venue.appendChild(meta);
+
+        main.appendChild(authors);
+        main.appendChild(title);
+        main.appendChild(venue);
+        item.appendChild(main);
 
         return item;
     }
 
-    // 荣誉区：items 为空时显示 emptyText，避免页面出现空白章节。
+    // 荣誉区：年份和奖项名称由 createHonorItem 生成一张紧凑卡片。
     function renderHonors(honors) {
         setText("honors-title", honors.title);
 
@@ -323,22 +323,16 @@
 
     function createHonorItem(honor) {
         var item = document.createElement("article");
-        // item.className = "honor-item";
+        item.className = "honor-item";
 
-        // var title = document.createElement("h3");
-        // title.textContent = honor.title;
-        // item.appendChild(title);
+        var time = document.createElement("p");
+        time.className = "honor-time";
+        time.textContent = honor.time;
+        item.appendChild(time);
 
-        // if (honor.meta) {
-        //     var meta = document.createElement("p");
-        //     meta.className = "item-type";
-        //     meta.textContent = honor.meta;
-        //     item.appendChild(meta);
-        // }
-
-        // if (honor.description) {
-        //     item.appendChild(createParagraph(honor.description));
-        // }
+        var description = createParagraph(honor.description);
+        description.className = "honor-description";
+        item.appendChild(description);
 
         return item;
     }

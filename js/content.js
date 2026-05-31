@@ -93,17 +93,32 @@ window.SITE_CONTENT = {
             publishedTitle: "正式发表",
             preprintTitle: "预印本"
         },
-        // 荣誉为空时会显示 emptyText；有内容后填入 items 数组即可。
         honors: {
             title: "荣誉与奖励",
             items: [
                 {
-                    time: "",
-                    description: ""
+                    time: "2015",
+                    description: "中国数学奥林匹克二等奖"
                 },
                 {
-                    time: "",
-                    description: ""
+                    time: "2017—2020",
+                    description: "清华大学数学学堂班成员"
+                },
+                {
+                    time: "2017",
+                    description: "清华大学学业优秀奖"
+                },
+                {
+                    time: "2018",
+                    description: "清华大学学业优秀奖"
+                },
+                {
+                    time: "2019",
+                    description: "清华大学综合优秀奖"
+                },
+                {
+                    time: "2025",
+                    description: "清华大学博士优秀学位论文"
                 }
             ]
         },
@@ -183,21 +198,36 @@ window.SITE_CONTENT = {
             ]
         },
         outputs: {
-            title: "Academic Output",
-            publishedTitle: "Peer-reviewed publications",
+            title: "Academic Outputs",
+            publishedTitle: "Publications",
             preprintTitle: "Preprints"
         },
-        // 英文荣誉内容为空时同样显示 emptyText。
         honors: {
             title: "Honors and Awards",
             items: [
                 {
-                    time: "",
-                    description: ""
+                    time: "2015",
+                    description: "Second Prize, Chinese Mathematical Olympiad"
                 },
                 {
-                    time: "",
-                    description: ""
+                    time: "2017—2020",
+                    description: "Member, Tsinghua Xuetang Mathematics Program"
+                },
+                {
+                    time: "2017",
+                    description: "Academic Excellent Award, Tsinghua University"
+                },
+                {
+                    time: "2018",
+                    description: "Academic Excellent Award, Tsinghua University"
+                },
+                {
+                    time: "2019",
+                    description: "Comprehensive Excellent Award, Tsinghua University"
+                },
+                {
+                    time: "2025",
+                    description: "Excellent Doctoral Dissertation, Tsinghua University"
                 }
             ]
         },
