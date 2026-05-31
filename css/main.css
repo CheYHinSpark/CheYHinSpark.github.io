@@ -40,13 +40,13 @@
 
     /* 间距：以 m 为基准，向左变小，向右变大 */
     --space-sss: 4px;
-    --space-ss: 8px;
-    --space-s: 12px;
-    --space-m: 16px;
-    --space-l: 24px;
-    --space-ll: 32px;
-    --space-lll: 48px;
-    --space-llll: 64px;
+    --space-ss: 6px;
+    --space-s: 8px;
+    --space-m: 12px;
+    --space-l: 16px;
+    --space-ll: 24px;
+    --space-lll: 32px;
+    --space-llll: 48px;
 
     /* 字号：普通正文用 m，辅助信息用 s/ss，标题单独用 heading */
     --text-sss: 10px;
@@ -538,7 +538,7 @@ main,
     position: absolute;
     top: var(--space-s);
     bottom: var(--space-s);
-    left: var(--space-s);
+    left: var(--space-m);
     width: var(--timeline-line-width);
     background: var(--color-timeline-line);
     content: "";

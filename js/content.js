@@ -4,7 +4,7 @@
 window.SITE_SHARED = {
     profilePhoto: "img/profile.png",
     emails: [
-        "chenyiho20@mails.tsinghua.edu.cn",
+        "chenyihong@mail.tsinghua.edu.cn",
         "chenyihong0907@foxmail.com"
     ],
     cvHref: {
