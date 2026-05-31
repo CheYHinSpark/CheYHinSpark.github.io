@@ -12,8 +12,8 @@
 :root {
     /* 颜色：页面正文、卡片、链接、强调色都集中在这里 */
     --color-ink: #102030;
-    --color-body: #324456;
-    --color-muted: #647280;
+    --color-body: #224466;
+    --color-muted: #607080;
     --color-page: #f7f9fb;
     --color-panel: #ffffff;
     --color-white: #ffffff;
@@ -187,7 +187,6 @@ h3 {
     line-height: var(--line-card-title);
 }
 
-.section-kicker,
 .item-type {
     margin: 0;
     color: var(--color-accent);
@@ -215,11 +214,6 @@ h3 {
     margin-bottom: 0;
 }
 
-.section-note {
-    margin: var(--space-s) 0 0;
-    color: var(--color-muted);
-}
-
 /* =========================================================
    4. 页面骨架：容器宽度、章节距离、双栏布局
    ========================================================= */
@@ -240,21 +234,10 @@ main,
     margin-bottom: var(--space-ll);
 }
 
-/* 简介和联系区使用相同的右侧栏宽度 */
-.profile-grid,
-.contact-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
-    gap: var(--space-l);
-    align-items: start;
-}
-
 /* =========================================================
    5. 通用组件：按钮、标签、列表、卡片
    ========================================================= */
-.text-button,
-.action-link,
-.compact-link {
+.text-button {
     border-radius: var(--radius-m);
     font: inherit;
     line-height: var(--line-button);
@@ -263,9 +246,6 @@ main,
         border-color var(--transition-m),
         color var(--transition-m),
         transform var(--transition-m);
-}
-
-.text-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -295,35 +275,6 @@ main,
     border-color: var(--color-primary-strong);
 }
 
-.action-link,
-.compact-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(var(--space-l) + var(--space-m));
-    padding: 0 var(--space-m);
-    color: var(--color-primary);
-    background: var(--color-panel);
-    border: var(--border-width) solid var(--color-primary-border);
-    font-family: var(--font-display);
-    font-size: var(--text-s);
-    font-weight: var(--font-weight-b);
-    text-decoration: none;
-}
-
-.action-link:hover,
-.compact-link:hover {
-    color: var(--color-primary-strong);
-    background: var(--color-link-surface);
-    transform: translateY(var(--motion-lift));
-}
-
-.compact-link {
-    min-height: calc(var(--space-l) + var(--space-ss));
-    padding: 0 var(--space-s);
-    white-space: nowrap;
-}
-
 .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -344,14 +295,10 @@ main,
     font-weight: var(--font-weight-b);
 }
 
-.meta-list,
-.clean-list {
+.meta-list {
     margin: 0;
     padding: 0;
     list-style: none;
-}
-
-.meta-list {
     display: grid;
     gap: var(--space-ss);
     color: var(--color-muted);
@@ -359,47 +306,20 @@ main,
     line-height: var(--line-meta);
 }
 
-.clean-list {
-    display: grid;
-    gap: var(--space-s);
-    margin-top: var(--space-m);
-}
-
-.clean-list li {
-    position: relative;
-    padding-left: var(--space-l);
-    color: var(--color-muted);
-}
-
-.clean-list li::before {
-    position: absolute;
-    top: var(--list-dot-top);
-    left: 0;
-    width: var(--list-dot-size);
-    height: var(--list-dot-size);
-    background: var(--color-warm);
-    border-radius: 50%;
-    content: "";
-}
-
 /* 白底卡片的共用底座：新增卡片时优先复用这组视觉 */
-.role-panel,
 .projects-item,
 .timeline-body,
 .outputs-list li,
 .honor-item,
-.empty-state,
 .profile-card {
     background: var(--color-panel);
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-m);
 }
 
-.role-panel,
 .projects-item,
 .timeline-body,
-.honor-item,
-.empty-state {
+.honor-item {
     padding: var(--space-l);
 }
 
@@ -479,12 +399,6 @@ main,
 
 .identity-meta {
     margin-top: var(--space-l);
-}
-
-.profile-role {
-    margin: 0 0 var(--space-s);
-    color: var(--color-primary);
-    font-weight: var(--font-weight-bb);
 }
 
 .profile-card {
@@ -696,25 +610,13 @@ main,
     gap: var(--space-s);
 }
 
-.honor-item p,
-.empty-state {
+.honor-item p {
     margin: 0;
 }
 
 .honor-item > p:last-child {
     margin-top: var(--space-s);
     color: var(--color-muted);
-}
-
-.empty-state {
-    color: var(--color-muted);
-}
-
-.contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: var(--space-ss);
 }
 
 .site-footer {
@@ -782,9 +684,7 @@ main,
         padding: var(--space-lll) 0;
     }
 
-    .hero,
-    .profile-grid,
-    .contact-layout {
+    .hero {
         grid-template-columns: 1fr;
     }
 
@@ -800,11 +700,9 @@ main,
         width: min(var(--profile-card-width), var(--profile-card-mobile-width));
     }
 
-    .role-panel,
     .projects-item,
     .timeline-body,
     .honor-item,
-    .empty-state,
     .outputs-list li {
         padding: var(--space-m);
     }
@@ -844,15 +742,7 @@ main,
         grid-row: 1;
     }
 
-    .compact-link {
-        justify-self: start;
-    }
-
     .profile-photo {
         max-height: var(--profile-photo-mobile-height);
-    }
-
-    .action-link {
-        width: 100%;
     }
 }
