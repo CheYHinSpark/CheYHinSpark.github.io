@@ -70,10 +70,9 @@
     --transition-m: 0.18s ease;
 
     /* 页面主要尺寸 */
-    --content-width: 1120px;
-    --section-heading-width: 780px;
-    --hero-copy-width: 760px;
-    --profile-card-width: 320px;
+    --content-width: 1080px;
+    --copy-width: 720px;
+    --profile-card-width: 240px;
     --profile-card-mobile-width: 50%;
     --profile-photo-mobile-height: 320px;
 
@@ -191,7 +190,7 @@ h3 {
 }
 
 .lead {
-    max-width: var(--hero-copy-width);
+    max-width: var(--copy-width);
     margin: var(--space-l) 0 0;
 }
 
@@ -219,7 +218,7 @@ main,
 }
 
 .section-heading {
-    max-width: var(--section-heading-width);
+    max-width: var(--copy-width);
     margin-bottom: var(--space-ll);
 }
 
@@ -295,6 +294,16 @@ main,
     color: var(--color-muted);
     font-size: var(--text-s);
     line-height: var(--line-base);
+}
+
+.meta-list a {
+    color: inherit;
+    text-decoration-color: var(--color-border-strong);
+    transition: color var(--transition-m);
+}
+
+.meta-list a:hover {
+    color: var(--color-primary-strong);
 }
 
 /* 白底卡片的共用底座：新增卡片时优先复用这组视觉 */
@@ -392,11 +401,11 @@ main,
     gap: var(--space-lll);
     align-items: center;
     min-height: calc(100svh - var(--header-height));
-    padding: var(--space-llll) 0;
+    padding: var(--space-llll) var(--space-lll);
 }
 
 .hero-copy {
-    max-width: var(--hero-copy-width);
+    max-width: var(--copy-width);
 }
 
 .identity-meta {

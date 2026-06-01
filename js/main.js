@@ -126,7 +126,10 @@
         });
         shared.emails.forEach(function (line) {
             var item = document.createElement("li");
-            item.textContent = line;
+            var link = document.createElement("a");
+            link.href = "mailto:" + line;
+            link.textContent = line;
+            item.appendChild(link);
             list.appendChild(item);
         });
 

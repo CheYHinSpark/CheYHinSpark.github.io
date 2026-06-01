@@ -97,28 +97,28 @@ window.SITE_CONTENT = {
             title: "荣誉与奖励",
             items: [
                 {
-                    time: "2015",
-                    description: "中国数学奥林匹克二等奖"
-                },
-                {
-                    time: "2017—2020",
-                    description: "清华大学数学学堂班成员"
-                },
-                {
-                    time: "2017",
-                    description: "清华大学学业优秀奖"
-                },
-                {
-                    time: "2018",
-                    description: "清华大学学业优秀奖"
+                    time: "2025",
+                    description: "清华大学博士优秀学位论文"
                 },
                 {
                     time: "2019",
                     description: "清华大学综合优秀奖"
                 },
                 {
-                    time: "2025",
-                    description: "清华大学博士优秀学位论文"
+                    time: "2018",
+                    description: "清华大学学业优秀奖"
+                },
+                {
+                    time: "2017",
+                    description: "清华大学学业优秀奖"
+                },
+                {
+                    time: "2017—2020",
+                    description: "清华大学数学学堂班成员"
+                },
+                {
+                    time: "2015",
+                    description: "中国数学奥林匹克二等奖"
                 }
             ]
         },
@@ -206,28 +206,28 @@ window.SITE_CONTENT = {
             title: "Honors and Awards",
             items: [
                 {
-                    time: "2015",
-                    description: "Second Prize, Chinese Mathematical Olympiad"
-                },
-                {
-                    time: "2017—2020",
-                    description: "Member, Tsinghua Xuetang Mathematics Program"
-                },
-                {
-                    time: "2017",
-                    description: "Academic Excellent Award, Tsinghua University"
-                },
-                {
-                    time: "2018",
-                    description: "Academic Excellent Award, Tsinghua University"
+                    time: "2025",
+                    description: "Excellent Doctoral Dissertation, Tsinghua University"
                 },
                 {
                     time: "2019",
                     description: "Comprehensive Excellent Award, Tsinghua University"
                 },
                 {
-                    time: "2025",
-                    description: "Excellent Doctoral Dissertation, Tsinghua University"
+                    time: "2018",
+                    description: "Academic Excellent Award, Tsinghua University"
+                },
+                {
+                    time: "2017",
+                    description: "Academic Excellent Award, Tsinghua University"
+                },
+                {
+                    time: "2017—2020",
+                    description: "Member, Tsinghua Xuetang Mathematics Program"
+                },
+                {
+                    time: "2015",
+                    description: "Second Prize, Chinese Mathematical Olympiad"
                 }
             ]
         },
