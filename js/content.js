@@ -240,6 +240,14 @@ window.SITE_CONTENT = {
 window.SITE_PUBLICATIONS = [
     {
         status: "published",
+        authors: ["Yihong Chen", "Shuai Wang", "Yaqing Wang", "Quanming Yao"],
+        title: "A Survey on Benchmarks of LLM-based GUI Agents",
+        venue: "Transactions on Machine Learning Research",
+        detail: "2026",
+        links: [{ label: "OpenReview", href: "https://openreview.net/forum?id=ri3yPWE21Q" }]
+    },
+    {
+        status: "published",
         authors: ["Yihong Chen", "Qian Huang", "Wen-An Yong", "Ruixi Zhang"],
         title: "Poisson quadrature method of moments for 2D kinetic equations with velocity of constant magnitude",
         venue: "Multiscale Modeling and Simulation",
@@ -261,6 +269,14 @@ window.SITE_PUBLICATIONS = [
         venue: "Journal of Scientific Computing",
         detail: "95(3), 2023",
         links: [{ label: "DOI", href: "https://doi.org/10.1007/s10915-023-02211-8" }]
+    },
+    {
+        status: "preprint",
+        authors: ["Yihong Chen", "Zhouchen Lin", "Quanming Yao"],
+        title: "Attention Sinks Induce Gradient Sinks: Massive Activations as Gradient Regulators in Transformers",
+        venue: "arXiv",
+        detail: "2603.17771, 2026",
+        links: [{ label: "arXiv", href: "https://arxiv.org/abs/2603.17771" }]
     },
     {
         status: "preprint",
