@@ -3,23 +3,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description">
+    <meta name="description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
+    <meta name="author" content="Yihong Chen">
+    <meta name="keywords" content="陈奕宏, Yihong Chen, LLM Agent, Scientific Computing, Numerical Algorithms, Mathematical Reasoning">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="陈奕宏 | Yihong Chen">
+    <meta property="og:description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="陈奕宏 | Yihong Chen">
+    <meta name="twitter:description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
     <title></title>
-    <!-- 样式统一维护在 css/main.css；页面文字和列表数据主要维护在 js/content.js。 -->
+    <!-- 样式统一维护在 css/main.css；发表相关数据维护在 js/publications.js。 -->
     <link rel="stylesheet" href="css/main.css">
     <script src="js/content.js" defer></script>
+    <script src="js/publications.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
-<body>
+<body data-page="home">
     <header class="site-header">
-        <a class="brand" href="#top" id="brand"></a>
-        <!-- 顶部导航：href、data-nav、下方 section 的 id 三者需要保持一致。 -->
+        <a class="brand" href="index.html#top" id="brand"></a>
+        <!-- 顶部导航：data-nav 对应 content.js 的 nav 键名；href 可指向本页锚点或独立页面。 -->
         <nav class="site-nav" aria-label="Primary navigation">
             <a href="#profile" data-nav="profile"></a>
             <a href="#experience" data-nav="experience"></a>
             <a href="#projects" data-nav="projects"></a>
-            <a href="#outputs" data-nav="outputs"></a>
             <a href="#honors" data-nav="honors"></a>
+            <a href="publications.html" data-nav="outputs"></a>
         </nav>
         <div class="header-actions">
             <button class="text-button" id="language-toggle" type="button">En</button>
@@ -36,6 +45,7 @@
                 <div class="identity-meta">
                     <ul class="meta-list" id="profile-lines"></ul>
                 </div>
+                <div class="profile-links" id="profile-links" aria-label="Academic profiles"></div>
                 <div class="tag-list" id="hero-tags" aria-label="Focus areas"></div>
             </div>
             <aside class="profile-card" aria-label="Profile">
@@ -49,6 +59,14 @@
                 <h2 id="profile-title"></h2>
             </div>
             <div class="body-copy" id="profile-copy"></div>
+        </section>
+
+        <section class="section" id="research-focus" aria-labelledby="research-focus-title">
+            <div class="section-heading">
+                <h2 id="research-focus-title"></h2>
+                <p class="section-copy" id="research-focus-lead"></p>
+            </div>
+            <div class="research-focus-grid" id="research-focus-list"></div>
         </section>
 
         <section class="section" id="experience" aria-labelledby="experience-title">
@@ -65,27 +83,22 @@
             <div class="projects-list" id="projects-list"></div>
         </section>
 
-        <!-- 论文列表来自 window.SITE_OUTPUTS，正式发表和预印本按 status 自动分组。 -->
-        <section class="section" id="outputs" aria-labelledby="outputs-title">
-            <div class="section-heading">
-                <h2 id="outputs-title"></h2>
-            </div>
-            <div class="outputs-block">
-                <h3 id="published-title"></h3>
-                <ol class="outputs-list" id="published-list"></ol>
-            </div>
-            <div class="outputs-block">
-                <h3 id="preprint-title"></h3>
-                <ol class="outputs-list" id="preprint-list"></ol>
-            </div>
-        </section>
-
         <!-- 荣誉与奖励列表由 content.js 维护，JS 按当前语言生成卡片。 -->
         <section class="section" id="honors" aria-labelledby="honors-title">
             <div class="section-heading">
                 <h2 id="honors-title"></h2>
             </div>
             <div class="honor-list" id="honor-list"></div>
+        </section>
+
+        <!-- 完整论文列表放在 publications.html，首页只保留入口。 -->
+        <section class="section" id="outputs" aria-labelledby="outputs-title">
+            <div class="section-heading">
+                <h2 id="outputs-title"></h2>
+            </div>
+            <div class="section-actions">
+                <a class="text-button primary" id="outputs-link" href="publications.html"></a>
+            </div>
         </section>
     </main>
 

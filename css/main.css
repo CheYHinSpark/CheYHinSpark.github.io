@@ -222,6 +222,20 @@ main,
     margin-bottom: var(--space-ll);
 }
 
+.section-copy {
+    max-width: var(--copy-width);
+    margin: var(--space-m) 0 0;
+    color: var(--color-body);
+    font-size: var(--text-l);
+}
+
+.section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    margin-top: var(--space-l);
+}
+
 /* =========================================================
    5. 通用组件：按钮、标签、列表、卡片
    ========================================================= */
@@ -311,7 +325,8 @@ main,
 .timeline-body,
 .outputs-list li,
 .profile-card,
-.honor-item {
+.honor-item,
+.research-focus-item {
     background: var(--color-panel);
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-m);
@@ -386,6 +401,11 @@ main,
     background: var(--color-soft);
 }
 
+.site-nav a[aria-current="page"] {
+    color: var(--color-ink);
+    background: var(--color-soft);
+}
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -412,6 +432,38 @@ main,
     margin-top: var(--space-l);
 }
 
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-ss);
+    margin-top: var(--space-l);
+}
+
+.profile-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: calc(var(--space-l) + var(--space-s));
+    padding: 0 var(--space-s);
+    color: var(--color-primary);
+    background: var(--color-panel);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-m);
+    font-size: var(--text-s);
+    font-weight: var(--font-weight-b);
+    line-height: var(--line-button);
+    text-decoration: none;
+    transition:
+        background-color var(--transition-m),
+        border-color var(--transition-m),
+        color var(--transition-m);
+}
+
+.profile-links a:hover {
+    color: var(--color-white);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
 .profile-card {
     align-self: center;
     overflow: hidden;
@@ -429,6 +481,24 @@ main,
 /* =========================================================
    8. 科研与项目经历
    ========================================================= */
+.research-focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-l);
+}
+
+.research-focus-item {
+    display: grid;
+    gap: var(--space-m);
+    align-content: start;
+    padding: var(--space-l);
+}
+
+.research-focus-description {
+    margin: 0;
+    color: var(--color-body);
+}
+
 .projects-item-header {
     margin-bottom: var(--space-m);
 }
@@ -502,6 +572,10 @@ main,
 /* =========================================================
    10. 学术成果列表
    ========================================================= */
+.publications-section {
+    border-top: 0;
+}
+
 .outputs-block {
     margin-top: var(--space-ll);
 }
@@ -570,6 +644,26 @@ main,
 
 .outputs-meta a {
     margin-left: var(--space-ss);
+}
+
+.inline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-ss);
+}
+
+.inline-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: calc(var(--space-l) + var(--space-sss));
+    padding: 0 var(--space-s);
+    color: var(--color-tag-text);
+    background: var(--color-tag-bg);
+    border: var(--border-width) solid var(--color-tag-border);
+    border-radius: var(--radius-m);
+    font-size: var(--text-ss);
+    font-weight: var(--font-weight-b);
+    line-height: var(--line-button);
 }
 
 /* =========================================================
@@ -667,7 +761,8 @@ main,
     }
 
     .lead,
-    .body-copy {
+    .body-copy,
+    .section-copy {
         font-size: var(--text-m);
     }
 
@@ -691,7 +786,8 @@ main,
     .projects-item,
     .timeline-body,
     .outputs-list li,
-    .honor-item {
+    .honor-item,
+    .research-focus-item {
         padding: var(--space-m);
     }
 
@@ -706,6 +802,10 @@ main,
 
     .outputs-list {
         font-size: var(--text-s);
+    }
+
+    .research-focus-grid {
+        grid-template-columns: 1fr;
     }
 
     .profile-photo {

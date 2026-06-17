@@ -1,5 +1,5 @@
-// 这个文件只负责“把 js/content.js 里的数据填进 index.html”。
-// 日常改文字、增删项目、增删论文时，优先改 content.js；只有改展示结构时才改这里。
+// 这个文件负责把 js/content.js 和 js/publications.js 里的数据填进页面。
+// 日常改文字、增删项目、增删论文时，优先改数据文件；只有改展示结构时才改这里。
 (function () {
     "use strict";
 
@@ -65,10 +65,20 @@
     // 页面总渲染入口：新增章节时，在这里增加对应的 renderXXX 调用。
     function renderPage(lang) {
         var content = window.SITE_CONTENT[lang] || window.SITE_CONTENT.zh;
+        var publicationContent = getPublicationContent(lang);
+        var page = getPageName();
+        var pageTitle = content.title;
+        var pageDescription = content.description;
+        var pageKeywords = content.keywords || "";
 
         document.documentElement.lang = content.htmlLang;
-        document.title = content.title;
-        updateMetaDescription(content.description);
+        if (page === "publications" && publicationContent) {
+            pageTitle = publicationContent.pageDocumentTitle || pageTitle;
+            pageDescription = publicationContent.pageDescription || pageDescription;
+            pageKeywords = publicationContent.pageKeywords || pageKeywords;
+        }
+        document.title = pageTitle;
+        updateDocumentMetadata(pageTitle, pageDescription, pageKeywords);
 
         setText("brand", content.brand);
         setText("language-toggle", content.languageToggle);
@@ -76,18 +86,41 @@
         renderNav(content.nav);
         renderHero(content);
         renderProfile(content.profile);
+        renderResearchFocus(content.researchFocus);
         renderExperience(content.experience);
         renderProjects(content.projects);
-        renderOutputs(content.outputs);
+        renderOutputs(publicationContent);
         renderHonors(content.honors);
         setText("footer-text", content.footer);
     }
 
-    // 同步浏览器标题和搜索摘要。
-    function updateMetaDescription(description) {
-        var meta = document.querySelector("meta[name='description']");
+    function getPageName() {
+        return document.body ? document.body.getAttribute("data-page") || "home" : "home";
+    }
+
+    function getPublicationContent(lang) {
+        var allContent = window.SITE_PUBLICATION_CONTENT || {};
+        return allContent[lang] || allContent.zh || null;
+    }
+
+    // 同步浏览器标题、搜索摘要和分享预览。
+    function updateDocumentMetadata(title, description, keywords) {
+        setMetaContent("name", "description", description);
+        setMetaContent("name", "keywords", keywords);
+        setMetaContent("property", "og:title", title);
+        setMetaContent("property", "og:description", description);
+        setMetaContent("name", "twitter:title", title);
+        setMetaContent("name", "twitter:description", description);
+    }
+
+    function setMetaContent(attributeName, attributeValue, content) {
+        if (!content) {
+            return;
+        }
+
+        var meta = document.querySelector("meta[" + attributeName + "='" + attributeValue + "']");
         if (meta) {
-            meta.setAttribute("content", description);
+            meta.setAttribute("content", content);
         }
     }
 
@@ -104,6 +137,9 @@
     function renderHero(content) {
         var shared = getSharedContent();
         var hero = content.hero;
+        if (!hero) {
+            return;
+        }
         // 姓名
         setText("profile-name", hero.name);
         // 头像
@@ -119,21 +155,24 @@
         var list = document.getElementById("profile-lines");
         clearElement(list);
 
-        hero.address.forEach(function (line) {
-            var item = document.createElement("li");
-            item.textContent = line;
-            list.appendChild(item);
-        });
-        shared.emails.forEach(function (line) {
-            var item = document.createElement("li");
-            var link = document.createElement("a");
-            link.href = "mailto:" + line;
-            link.textContent = line;
-            item.appendChild(link);
-            list.appendChild(item);
-        });
+        if (list) {
+            (hero.address || []).forEach(function (line) {
+                var item = document.createElement("li");
+                item.textContent = line;
+                list.appendChild(item);
+            });
+            (shared.emails || []).forEach(function (line) {
+                var item = document.createElement("li");
+                var link = document.createElement("a");
+                link.href = "mailto:" + line;
+                link.textContent = line;
+                item.appendChild(link);
+                list.appendChild(item);
+            });
+        }
 
         renderTagList("hero-tags", hero.tags);
+        renderProfileLinks();
     }
 
     // 简介区：正文段落和右侧能力关键词。
@@ -149,11 +188,71 @@
         }
     }
 
+    function renderProfileLinks() {
+        var list = document.getElementById("profile-links");
+        var shared = getSharedContent();
+        if (!list) {
+            return;
+        }
+
+        clearElement(list);
+        (shared.profileLinks || []).forEach(function (linkData) {
+            var link = document.createElement("a");
+            var isEmail = linkData.href.indexOf("mailto:") === 0;
+            link.href = linkData.href;
+            if (!isEmail) {
+                link.target = "_blank";
+                link.rel = "noopener";
+            }
+            link.textContent = linkData.label;
+            list.appendChild(link);
+        });
+    }
+
+    function renderResearchFocus(researchFocus) {
+        if (!researchFocus) {
+            return;
+        }
+
+        setText("research-focus-title", researchFocus.title);
+        setText("research-focus-lead", researchFocus.lead);
+
+        var list = document.getElementById("research-focus-list");
+        if (!list) {
+            return;
+        }
+
+        clearElement(list);
+        (researchFocus.items || []).forEach(function (item) {
+            list.appendChild(createResearchFocusItem(item));
+        });
+    }
+
+    function createResearchFocusItem(item) {
+        var article = document.createElement("article");
+        article.className = "research-focus-item";
+
+        var title = document.createElement("h3");
+        title.textContent = item.title;
+        article.appendChild(title);
+
+        var description = createParagraph(item.description);
+        description.className = "research-focus-description";
+        article.appendChild(description);
+
+        article.appendChild(createInlineTags(item.tags || []));
+
+        return article;
+    }
+
     // 科研与项目经历：每一项由 createprojectsItem 生成一张卡片。
     function renderProjects(projects) {
         setText("projects-title", projects.title);
 
         var list = document.getElementById("projects-list");
+        if (!list) {
+            return;
+        }
 
         clearElement(list);
         projects.items.forEach(function (item) {
@@ -230,9 +329,16 @@
         });
     }
 
-    // 学术成果：按 published / preprint 自动拆成两组列表。
+    // 学术成果：首页展示入口，发表页按 published / preprint 自动分组。
     function renderOutputs(copy) {
+        if (!copy) {
+            return;
+        }
+
         setText("outputs-title", copy.title);
+        setText("outputs-link", copy.viewAll);
+        setText("publications-back-link", copy.backHome);
+        setText("publication-list-title", copy.listTitle);
         setText("published-title", copy.publishedTitle);
         setText("preprint-title", copy.preprintTitle);
 
@@ -247,25 +353,23 @@
         }
 
         clearElement(list);
-
-        window.SITE_PUBLICATIONS
-            .filter(function (outputs) {
-                return outputs.status === status;
+        getPublications()
+            .filter(function (publication) {
+                return publication.status === status;
             })
-            .forEach(function (outputs) {
-                list.appendChild(createOutputsItem(outputs));
+            .forEach(function (publication) {
+                list.appendChild(createOutputsItem(publication));
             });
     }
 
-    function createOutputsItem(outputs) {
+    function createOutputsItem(publication) {
         var item = document.createElement("li");
-
         var main = document.createElement("div");
         main.className = "outputs-main";
 
         var authors = document.createElement("p");
         authors.className = "outputs-authors";
-        outputs.authors.forEach(function (author, index) {
+        (publication.authors || []).forEach(function (author, index) {
             if (index > 0) {
                 authors.appendChild(document.createTextNode(", "));
             }
@@ -279,21 +383,25 @@
             }
         });
         authors.appendChild(document.createTextNode("."));
+        main.appendChild(authors);
 
         var title = document.createElement("p");
         title.className = "outputs-title";
-        title.textContent = outputs.title + ".";
+        title.textContent = publication.title + ".";
+        main.appendChild(title);
 
         var venue = document.createElement("p");
         venue.className = "outputs-venue";
         var venueName = document.createElement("em");
-        venueName.textContent = outputs.venue;
+        venueName.textContent = publication.venue || "";
         venue.appendChild(venueName);
 
         var meta = document.createElement("span");
         meta.className = "outputs-meta";
-        meta.appendChild(document.createTextNode(", " + outputs.detail + "."));
-        outputs.links.forEach(function (linkData) {
+        if (publication.detail) {
+            meta.appendChild(document.createTextNode(", " + publication.detail + "."));
+        }
+        (publication.links || []).forEach(function (linkData) {
             var link = document.createElement("a");
             link.href = linkData.href;
             link.target = "_blank";
@@ -302,13 +410,29 @@
             meta.appendChild(link);
         });
         venue.appendChild(meta);
-
-        main.appendChild(authors);
-        main.appendChild(title);
         main.appendChild(venue);
         item.appendChild(main);
 
         return item;
+    }
+
+    function createInlineTags(tags) {
+        var list = document.createElement("div");
+        list.className = "inline-tags";
+
+        tags.forEach(function (text) {
+            var tag = document.createElement("span");
+            tag.className = "inline-tag";
+            tag.textContent = text;
+            list.appendChild(tag);
+        });
+
+        return list;
+    }
+
+
+    function getPublications() {
+        return Array.isArray(window.SITE_PUBLICATIONS) ? window.SITE_PUBLICATIONS : [];
     }
 
     // 荣誉区：年份和奖项名称由 createHonorItem 生成一张紧凑卡片。
@@ -316,6 +440,9 @@
         setText("honors-title", honors.title);
 
         var list = document.getElementById("honor-list");
+        if (!list) {
+            return;
+        }
 
         clearElement(list);
 
