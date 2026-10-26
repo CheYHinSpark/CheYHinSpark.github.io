@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
+    <meta name="description" content="陈奕宏，清华大学电子工程系博士后。研究 Transformer 机制、GUI 智能体评测与记忆复用、大模型训练稳定性，以及动理学方程的模型与数值方法。">
     <meta name="author" content="Yihong Chen">
-    <meta name="keywords" content="陈奕宏, Yihong Chen, LLM Agent, Scientific Computing, Numerical Algorithms, Mathematical Reasoning">
+    <meta name="keywords" content="陈奕宏, Yihong Chen, Transformer, LLM, GUI Agent, Attention Sinks, Training Stability, Kinetic Equations">
     <meta property="og:type" content="website">
     <meta property="og:title" content="陈奕宏 | Yihong Chen">
-    <meta property="og:description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
+    <meta property="og:description" content="陈奕宏，清华大学电子工程系博士后。研究 Transformer 机制、GUI 智能体评测与记忆复用、大模型训练稳定性，以及动理学方程的模型与数值方法。">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="陈奕宏 | Yihong Chen">
-    <meta name="twitter:description" content="陈奕宏的个人主页：LLM Agent、科学计算、数值算法、数学推理与工具化科研流程。">
-    <title></title>
+    <meta name="twitter:description" content="陈奕宏，清华大学电子工程系博士后。研究 Transformer 机制、GUI 智能体评测与记忆复用、大模型训练稳定性，以及动理学方程的模型与数值方法。">
+    <title>陈奕宏 | Yihong Chen</title>
     <!-- 样式统一维护在 css/main.css；发表相关数据维护在 js/publications.js。 -->
     <link rel="stylesheet" href="css/main.css">
     <script src="js/content.js" defer></script>
@@ -25,6 +25,7 @@
         <!-- 顶部导航：data-nav 对应 content.js 的 nav 键名；href 可指向本页锚点或独立页面。 -->
         <nav class="site-nav" aria-label="Primary navigation">
             <a href="#profile" data-nav="profile"></a>
+            <a href="#research-focus" data-nav="research"></a>
             <a href="#experience" data-nav="experience"></a>
             <a href="#projects" data-nav="projects"></a>
             <a href="#honors" data-nav="honors"></a>
@@ -40,8 +41,10 @@
         <!-- 首屏：这里保留结构，姓名、简介、标签和个人信息由 JS 按语言填入。 -->
         <section class="hero" aria-labelledby="profile-name">
             <div class="hero-copy">
+                <p class="eyebrow" id="hero-eyebrow"></p>
                 <h1 id="profile-name"></h1>
                 <p class="lead" id="hero-lead"></p>
+                <p class="opportunity" id="hero-opportunity"></p>
                 <div class="identity-meta">
                     <ul class="meta-list" id="profile-lines"></ul>
                 </div>
@@ -91,11 +94,14 @@
             <div class="honor-list" id="honor-list"></div>
         </section>
 
-        <!-- 完整论文列表放在 publications.html，首页只保留入口。 -->
+        <!-- 首页展示近期代表工作，完整论文列表放在 publications.html。 -->
         <section class="section" id="outputs" aria-labelledby="outputs-title">
             <div class="section-heading">
                 <h2 id="outputs-title"></h2>
+                <p class="section-copy" id="outputs-summary"></p>
             </div>
+            <h3 class="selected-title" id="selected-title"></h3>
+            <ol class="outputs-list" id="selected-list"></ol>
             <div class="section-actions">
                 <a class="text-button primary" id="outputs-link" href="publications.html"></a>
             </div>

@@ -150,7 +150,9 @@
             }
         }
         // 简介
+        setText("hero-eyebrow", hero.eyebrow);
         setText("hero-lead", hero.lead);
+        setText("hero-opportunity", hero.opportunity);
         // 地址和邮箱
         var list = document.getElementById("profile-lines");
         clearElement(list);
@@ -175,7 +177,7 @@
         renderProfileLinks();
     }
 
-    // 简介区：正文段落和右侧能力关键词。
+    // 简介区：正文段落。
     function renderProfile(profile) {
         setText("profile-title", profile.title);
 
@@ -232,20 +234,20 @@
         var article = document.createElement("article");
         article.className = "research-focus-item";
 
-        var title = document.createElement("h3");
-        title.textContent = item.title;
-        article.appendChild(title);
+        article.appendChild(createItemHeader(item.title, item.role, item.duration));
 
         var description = createParagraph(item.description);
         description.className = "research-focus-description";
         article.appendChild(description);
+        article.appendChild(createHighlights(item.highlights || []));
 
         article.appendChild(createInlineTags(item.tags || []));
+        article.appendChild(createRelatedPapers(item.publicationIds || []));
 
         return article;
     }
 
-    // 科研与项目经历：每一项由 createprojectsItem 生成一张卡片。
+    // 项目条目保留合作方、角色、时间和具体贡献。
     function renderProjects(projects) {
         setText("projects-title", projects.title);
 
@@ -264,27 +266,63 @@
         var article = document.createElement("article");
         article.className = "projects-item";
 
-        var header = document.createElement("div");
-        header.className = "projects-item-header";
-
-        var titleGroup = document.createElement("div");
-        var title = document.createElement("h3");
-        title.textContent = item.title;
-        titleGroup.appendChild(title);
-
-        var type = document.createElement("p");
-        type.className = "item-type";
-        type.textContent = item.type;
-        titleGroup.appendChild(type);
-        header.appendChild(titleGroup);
-
-        article.appendChild(header);
+        article.appendChild(createItemHeader(item.title, item.type, item.duration));
         article.appendChild(createParagraph(item.description));
+        article.appendChild(createHighlights(item.highlights || []));
 
         return article;
     }
 
-    // 教育与工作经历：position 决定时间轴圆点颜色，duration 决定右上角时间。
+    function createItemHeader(titleText, role, duration) {
+        var header = document.createElement("div");
+        header.className = "item-header";
+        var title = document.createElement("h3");
+        title.textContent = titleText;
+        header.appendChild(title);
+
+        var meta = document.createElement("div");
+        meta.className = "item-meta";
+        var roleText = createParagraph(role);
+        roleText.className = "item-type";
+        meta.appendChild(roleText);
+        var time = createParagraph(duration);
+        time.className = "item-duration";
+        meta.appendChild(time);
+        header.appendChild(meta);
+        return header;
+    }
+
+    function createHighlights(highlights) {
+        var list = document.createElement("ul");
+        list.className = "item-highlights";
+        highlights.forEach(function (text) {
+            var item = document.createElement("li");
+            item.textContent = text;
+            list.appendChild(item);
+        });
+        return list;
+    }
+
+    function createRelatedPapers(ids) {
+        var links = document.createElement("p");
+        links.className = "related-papers";
+        var copy = getPublicationContent(currentLang);
+        links.appendChild(document.createTextNode(copy.relatedPapers + ": "));
+        getPublications().forEach(function (publication, index) {
+            if (ids.indexOf(publication.id) === -1) {
+                return;
+            }
+            var link = document.createElement("a");
+            link.href = "publications.html#paper-" + publication.id;
+            link.textContent = "[" + (index + 1) + "]";
+            link.title = publication.title;
+            link.setAttribute("aria-label", publication.title);
+            links.appendChild(link);
+        });
+        return links;
+    }
+
+    // 教育与工作经历：日期在普通文档流中排列，适应英文长标题。
     function renderExperience(experience) {
         setText("experience-title", experience.title);
 
@@ -307,12 +345,12 @@
             body.className = "timeline-body";
 
             // 内容
-            var title = document.createElement("text");
-            title.className = "item-type";
+            var title = document.createElement("h3");
             title.textContent = item.title;
             body.appendChild(title);
 
-            var affiliation = document.createElement("text");
+            var affiliation = document.createElement("p");
+            affiliation.className = "timeline-affiliation";
             affiliation.textContent = item.affiliation;
             body.appendChild(affiliation);
 
@@ -329,7 +367,7 @@
         });
     }
 
-    // 学术成果：首页展示入口，发表页按 published / preprint 自动分组。
+    // 首页展示近期代表作；论文页按研究方向分组，每篇独立标注状态。
     function renderOutputs(copy) {
         if (!copy) {
             return;
@@ -339,31 +377,39 @@
         setText("outputs-link", copy.viewAll);
         setText("publications-back-link", copy.backHome);
         setText("publication-list-title", copy.listTitle);
-        setText("published-title", copy.publishedTitle);
-        setText("preprint-title", copy.preprintTitle);
+        setText("publications-lead", copy.lead);
+        setText("outputs-summary", copy.summary);
+        setText("selected-title", copy.selectedTitle);
+        setText("ai-title", copy.aiTitle);
+        setText("kinetics-title", copy.kineticsTitle);
 
-        renderOutputsList("published-list", "published");
-        renderOutputsList("preprint-list", "preprint");
+        renderOutputsList("ai-list", function (paper) { return paper.area === "ai"; }, copy);
+        renderOutputsList("kinetics-list", function (paper) { return paper.area === "kinetics"; }, copy);
+        renderOutputsList("selected-list", function (paper) {
+            return ["attention-sinks", "gui-survey", "vspeedui"].indexOf(paper.id) !== -1;
+        }, copy);
     }
 
-    function renderOutputsList(listId, status) {
+    function renderOutputsList(listId, predicate, copy) {
         var list = document.getElementById(listId);
         if (!list) {
             return;
         }
 
         clearElement(list);
-        getPublications()
-            .filter(function (publication) {
-                return publication.status === status;
-            })
-            .forEach(function (publication) {
-                list.appendChild(createOutputsItem(publication));
-            });
+        var publications = getPublications();
+        var filtered = publications.filter(predicate);
+        var start = filtered.length ? publications.indexOf(filtered[0]) : 0;
+        list.setAttribute("start", start + 1);
+        list.style.setProperty("--publication-start", start);
+        filtered.forEach(function (publication) {
+            list.appendChild(createOutputsItem(publication, copy));
+        });
     }
 
-    function createOutputsItem(publication) {
+    function createOutputsItem(publication, copy) {
         var item = document.createElement("li");
+        item.id = "paper-" + publication.id;
         var main = document.createElement("div");
         main.className = "outputs-main";
 
@@ -394,13 +440,19 @@
         venue.className = "outputs-venue";
         var venueName = document.createElement("em");
         venueName.textContent = publication.venue || "";
-        venue.appendChild(venueName);
+        if (publication.venue) {
+            venue.appendChild(venueName);
+        }
 
         var meta = document.createElement("span");
         meta.className = "outputs-meta";
         if (publication.detail) {
-            meta.appendChild(document.createTextNode(", " + publication.detail + "."));
+            meta.appendChild(document.createTextNode((publication.venue ? ", " : "") + publication.detail + "."));
         }
+        var status = document.createElement("span");
+        status.className = "publication-status status-" + publication.status;
+        status.textContent = copy.statusLabels[publication.status];
+        meta.appendChild(status);
         (publication.links || []).forEach(function (linkData) {
             var link = document.createElement("a");
             link.href = linkData.href;
